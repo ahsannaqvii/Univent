@@ -22,7 +22,7 @@ import com.univent.repositories.StudentRepository;
 import com.univent.services.MessageService;
 
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/api/student")
 public class StudentController {
 	@Autowired
 	private StudentRepository studentRepository;
@@ -32,6 +32,7 @@ public class StudentController {
 	private AddressRepository addressRepository;
 	
 	//Signup Method
+	//http://localhost:8080/api/student/signup
     @CrossOrigin(origins = "http://localhost:8081")
 	@PostMapping("/signup")
 	public ResponseEntity<Object> signUp(@RequestBody Student student){
@@ -44,25 +45,32 @@ public class StudentController {
 	
     
 	// Add a Address
+    //http://localhost:8080/api/student/addAddress
     @CrossOrigin(origins = "http://localhost:8081")
 	@PostMapping("/addAddress")
 	public ResponseEntity<Object> addAddress(@RequestBody AddressViewModel addressViewModel){
 		
 		Optional<Student> student = studentRepository.findById(addressViewModel.getStudent_id());
-		
+		Optional<Address> address1 = addressRepository.findByStudentId(addressViewModel.getStudent_id());
 		if(student!=null) {
-		Address address = new Address(null,addressViewModel.getStreet(),addressViewModel.getCity(),addressViewModel.getCountry(), student.get());
-		
-			return new ResponseEntity<Object>(addressRepository.save(address),HttpStatus.CREATED);
+			if(address1.isEmpty()) {
+				Address address = new Address(null,addressViewModel.getStreet(),addressViewModel.getCity(),addressViewModel.getCountry(), student.get());
+				return new ResponseEntity<Object>(addressRepository.save(address),HttpStatus.CREATED);
+			}
+			else {
+				Address address = new Address(address1.get().getId(),addressViewModel.getStreet(),addressViewModel.getCity(),addressViewModel.getCountry(), student.get());
+				return new ResponseEntity<Object>(addressRepository.save(address),HttpStatus.CREATED);
+			}
 		}
 		else
 			return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
 		
 	}
     
-    
+    //Get Profile
+    //http://localhost:8080/api/student/getProfile?id=1440
     @CrossOrigin(origins = "http://localhost:8081")
-	@GetMapping("/getstudentbyId")
+	@GetMapping("/getProfile")
     public ResponseEntity<Object> getStudentbyId(@RequestParam(name="id") String id){
     	Optional<Student> student = studentRepository.findById(id);
     	try {
@@ -74,6 +82,8 @@ public class StudentController {
     }
 	
 	
+    //Login
+    //http://localhost:8080/api/student/login
     @CrossOrigin(origins = "http://localhost:8081")
 	@PostMapping("/login")
 	public ResponseEntity<Object> login(@RequestBody LoginViewModel loginViewModel){
@@ -89,5 +99,52 @@ public class StudentController {
 	    	catch(Exception ex) {
 	    		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex);
 	    	}
-}
+    }
+    
+    
+    //Change Phone no.
+  	//http://localhost:8080/api/student/changePhone?id=1440
+    @CrossOrigin(origins = "http://localhost:8081")
+  	@PostMapping("/changePhone")
+  	public ResponseEntity<Object> changePhone(@RequestParam(name="id") String id ,@RequestBody String phone){
+    	
+    	Optional<Student> student = studentRepository.findById(id);
+  		if(student!= null){
+  			student.get().setPhone(phone);
+  			return new ResponseEntity<Object>(studentRepository.save(student.get()),HttpStatus.CREATED);
+  		}
+  		else
+  			return new ResponseEntity<Object>(HttpStatus.FOUND);
+  	}
+    
+    //Change Email
+  	//http://localhost:8080/api/student/changeEmail?id=1475
+    @CrossOrigin(origins = "http://localhost:8081")
+  	@PostMapping("/changeEmail")
+  	public ResponseEntity<Object> changeEmail(@RequestParam(name="id") String id ,@RequestBody String email){
+    	
+    	Optional<Student> student = studentRepository.findById(id);
+  		if(student!= null){
+  			student.get().setEmail(email);
+  			return new ResponseEntity<Object>(studentRepository.save(student.get()),HttpStatus.CREATED);
+  		}
+  		else
+  			return new ResponseEntity<Object>(HttpStatus.FOUND);
+  	}
+    
+    
+    //Change Password
+  	//http://localhost:8080/api/student/changePassword?id=1440
+    @CrossOrigin(origins = "http://localhost:8081")
+  	@PostMapping("/changePassword")
+  	public ResponseEntity<Object> changePassword(@RequestParam(name="id") String id ,@RequestBody String password){
+    	
+    	Optional<Student> student = studentRepository.findById(id);
+  		if(student!= null){
+  			student.get().setPassword(password);
+  			return new ResponseEntity<Object>(studentRepository.save(student.get()),HttpStatus.CREATED);
+  		}
+  		else
+  			return new ResponseEntity<Object>(HttpStatus.FOUND);
+  	}
 }

@@ -1,6 +1,8 @@
 package com.univent.models;
 
 
+import java.sql.Date;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
@@ -30,10 +32,10 @@ public class Student {
 	private String email;
 	
 	@Column(name="Password" , nullable=false)
-	private String password;
+	private String password;	
 	
 	@Column(name="DOB" , nullable=false)
-	private String dob;
+	private Date dob;
 	
 	@Column(name="Gender" , nullable=false)
 	private String gender;
