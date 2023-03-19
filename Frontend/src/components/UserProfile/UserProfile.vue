@@ -16,7 +16,7 @@
               height="40px"
             />
           </figure>
-          <span>University of China</span>
+          <span>{{studentID}}</span>
         </div>
       </header>
       <section class="userProfile card">
@@ -172,18 +172,15 @@
 // import { mapActions } from "vuex";
 
 export default {
-  name: "UserProfile",
-  // methods : {
-  //   ...mapActions(["getProfile"]),
-  // },
-  computed() {
+  data() {
     return {
-      profile: this.$store.getters.profile,
+      studentID: this.$store.getters.getStudentID,
     };
   },
+  name: "UserProfile",
 
   mounted() {
-    this.$store.dispatch("getProfile");
+    this.$store.dispatch("UserProfile");
   },
 };
 </script>

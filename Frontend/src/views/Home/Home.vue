@@ -1,5 +1,5 @@
 <template>
-  <p>hello</p>
+  <p>KYA HUGAYAAA</p>
 </template>
 
 <script>

@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 const state = {
   userName: "",
+  userID: null,
   userPassword: "",
   userDOB: null,
   userGender: null,
@@ -30,36 +31,44 @@ const getters = {
   getUserEmail: (state) => state.userEmail,
   getUserImage: (state) => state.userImage,
   getUserLoggedIn: (state) => state.userLoggedIn,
+  getStudentID:(state)=>state.userID,
 };
 
 const actions = {
-  async getProfile({ commit }) {
-    const response = await axios.get("http://localhost:3000/profile");
-    commit("GET_PROFILE", response.data);
+  async UserProfile({ commit }) {
+    
+    const response = await axios.get("http://localhost:8080/student/getstudentbyId?id=" +state.userID);
+    console.log(response.data);
+    // commit("GET_PROFILE", response.data);
   },
 
-  Login :({commit} , payload ) =>{
+  Login: ({ commit }, payload) => {
     //Trying out the Promise way  (Can also be done through await async)
-    return new Promise ( (resolve , reject) => { 
-        axios.post("http://localhost:8080/student/signup" , payload).then(({data,status})=>{
-            if(status===201){
-                resolve(true);
-            }
-        }).catch(err => {
-            reject(err);
+    return new Promise((resolve, reject) => {
+      axios
+        .post("http://localhost:8080/student/login", payload)
+        .then(({ data, status }) => {
+          if (status === 200) {
+            commit("LOGIN", data);
+            resolve(true);
+          }
         })
+        .catch((err) => {
+          reject(err);
+        });
     });
-  } 
-  
+
+
+  },
 };
 
 const mutations = {
-  GET_PROFILE: function (state, userData) {
-    state.userName = userData;
+  GET_PROFILE: function (state, studentData) {
+    state.userName = studentData;
+  },
+  LOGIN: function (state, {id}) {
+    state.userID=id;
   },
 
-//   VERIFY_STUDENT_TOKEN: function (state, userData) {
-//     state.userLoggedIn = userData;
-//   },
 };
 export { state, getters, actions, mutations };

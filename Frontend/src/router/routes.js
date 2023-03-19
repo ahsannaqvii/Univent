@@ -4,7 +4,7 @@ import UserProfile from "@/components/UserProfile/UserProfile.vue";
 export default [
   {
     name: "Home",
-    path: "/Home",
+    path: "/",
     component: Home,
   },
   {
