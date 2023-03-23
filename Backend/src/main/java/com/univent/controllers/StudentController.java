@@ -1,9 +1,11 @@
 package com.univent.controllers;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.univent.models.Address;
 import com.univent.models.AddressViewModel;
@@ -19,6 +23,7 @@ import com.univent.models.LoginViewModel;
 import com.univent.models.Student;
 import com.univent.repositories.AddressRepository;
 import com.univent.repositories.StudentRepository;
+import com.univent.serviceImpl.ImageUtil;
 import com.univent.services.MessageService;
 
 @RestController
@@ -147,4 +152,37 @@ public class StudentController {
   		else
   			return new ResponseEntity<Object>(HttpStatus.FOUND);
   	}
+    
+    
+    //ADD USER IMAGE
+  	//http://localhost:8080/api/student/addImage?id=1440
+    @CrossOrigin(origins = "http://localhost:8081")
+  	@PostMapping("/addImage")
+  	public ResponseEntity<Object> addImage(@RequestParam(name="id") String id , @RequestPart("file") MultipartFile file) throws IOException{
+  		
+    	Optional<Student> student = studentRepository.findById(id);
+    	if(student!=null){
+    		student.get().setImage(ImageUtil.compressImage(file.getBytes()));
+  			return new ResponseEntity<Object>(studentRepository.save(student.get()),HttpStatus.CREATED);
+  		}
+  		else
+  			return new ResponseEntity<Object>(HttpStatus.FOUND);
+  	}
+    
+    //GET USER IMAGE
+  	//http://localhost:8080/api/student/getImage?id=1440
+    @CrossOrigin(origins = "http://localhost:8081")
+  	@GetMapping("/getImage")
+    public ResponseEntity<Object> getImage(@RequestParam(name="id") String id){
+  		
+    	try {
+    	Optional<Student> student = studentRepository.findById(id);
+    		byte[] image = ImageUtil.decompressImage(student.get().getImage());
+    		return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/jpeg")).body(image);
+    	}catch(Exception ex) {
+  			return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+    	}
+  	}
+
+      
 }

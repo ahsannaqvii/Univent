@@ -10,6 +10,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -43,6 +44,9 @@ public class Student {
 	@Column(name="Phone" , nullable=false)
 	private String phone;
 	
+	@Lob
+	@Column(name="Image" , nullable=true)
+	private byte[] image;
 	
 	@OneToOne(fetch = FetchType.LAZY,
     cascade =  CascadeType.ALL,
