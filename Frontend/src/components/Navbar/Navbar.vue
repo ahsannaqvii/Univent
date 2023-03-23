@@ -2,7 +2,9 @@
   <header>
     <div class="university_icon">
       <!-- <img src="https://i.ibb.co/vYBFTD9/image2vector.png" class="logo" alt="university_logo" /> -->
-      <h2 style="color: white; ">UNIVERSITY OF CHINA</h2>
+      <h2 style="color: white">
+        <router-link to="/" class="main_heading">UNIVERSITY OF CHINA</router-link>
+      </h2>
     </div>
     <nav>
       <ul class="nav__links">
@@ -27,6 +29,9 @@ export default {
   font-family: "Poppins", sans-serif;
   font-weight: bold;
 }
+.main_heading{
+  font-size: 20px;
+}
 header {
   box-sizing: border-box;
   margin: 0;
@@ -37,6 +42,7 @@ header {
   align-items: center;
   /* padding: 0.5em 4em 0em; */
 }
+
 li,
 a {
   font-size: 16px;
@@ -51,6 +57,7 @@ nav {
   cursor: pointer;
 }
 .nav__links {
+  margin-bottom: 0px;
   list-style: none;
 }
 .nav__links li {
