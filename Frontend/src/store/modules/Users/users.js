@@ -18,35 +18,28 @@ const state = {
   userPhone: null,
   userEmail: "",
   userImage: null,
-  userLoggedIn: false,
 };
 
 const getters = {
-  getUserName: (state) => state.userName,
-  getUserPassword: (state) => state.userPassword,
-  getUserDOB: (state) => state.userDOB,
-  getUserGender: (state) => state.userGender,
-  getUserAddress: (state) => state.userAddress,
-  getUserPhone: (state) => state.userPhone,
-  getUserEmail: (state) => state.userEmail,
-  getUserImage: (state) => state.userImage,
-  getUserLoggedIn: (state) => state.userLoggedIn,
-  getStudentID:(state)=>state.userID,
+  UserData: (state) => state,
 };
+
+
+const baseURL= "http://localhost:8080/api/"
+
 
 const actions = {
   async UserProfile({ commit }) {
     
-    const response = await axios.get("http://localhost:8080/student/getstudentbyId?id=" +state.userID);
-    console.log(response.data);
-    // commit("GET_PROFILE", response.data);
+    const response = await axios.get(baseURL + "student/getProfile?id=" +state.userID);
+    commit("USER_PROFILE", response.data);
   },
 
   Login: ({ commit }, payload) => {
     //Trying out the Promise way  (Can also be done through await async)
     return new Promise((resolve, reject) => {
       axios
-        .post("http://localhost:8080/student/login", payload)
+        .post(baseURL + "student/login", payload)
         .then(({ data, status }) => {
           if (status === 200) {
             commit("LOGIN", data);
@@ -54,17 +47,28 @@ const actions = {
           }
         })
         .catch((err) => {
+          console.log(err);
           reject(err);
         });
     });
 
 
   },
+  UpdateUserProfile : ({commit},payload) => {
+    console.log(payload);
+  },
 };
 
 const mutations = {
-  GET_PROFILE: function (state, studentData) {
-    state.userName = studentData;
+  USER_PROFILE: function (state, {id,name,email,password,dob,phone,address}) {
+    state.userName = name;
+    state.userEmail = email;
+    state.userPassword = password;
+    state.userDOB = dob;
+    state.userPhone = phone;
+    state.userAddress.userStreet = address.street;
+    state.userAddress.userCity = address.city;
+    state.userAddress.userCountry = address.country;
   },
   LOGIN: function (state, {id}) {
     state.userID=id;

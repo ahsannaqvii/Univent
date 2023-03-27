@@ -1,5 +1,7 @@
 <template>
   <body>
+    <Modal v-show="isModalVisible" @close="closeModal" />
+
     <!-- ===== ===== Body Main-Background ===== ===== -->
     <span class="main_bg"></span>
 
@@ -16,7 +18,7 @@
               height="40px"
             />
           </figure>
-          <span>{{studentID}}</span>
+          <span>University of China</span>
         </div>
       </header>
       <section class="userProfile card">
@@ -38,11 +40,15 @@
         <div class="work">
           <h1 class="heading">work</h1>
           <div class="primary">
-            <h1>Beijing China</h1>
+            <h1>
+              {{ UserData.userAddress.userCity }} ,
+              {{ UserData.userAddress.userCountry }}
+            </h1>
             <span>Primary</span>
             <p>
-              170 William Street <br />
-              New York, NY 10038-212-315-51
+              {{ UserData.userAddress.userStreet }} <br />
+              {{ UserData.userAddress.userCity }} ,
+              {{ UserData.userAddress.userCountry }} 10038-212-315-51
             </p>
           </div>
         </div>
@@ -62,13 +68,16 @@
       <!-- ===== ===== User Details Sections ===== ===== -->
       <section class="userDetails card">
         <div class="userName">
-          <h1 class="name">Kawsar Khan</h1>
+          <h1 class="name">{{ UserData.userName }}</h1>
           <div class="map">
             <font-awesome-icon
               :icon="['fas', 'location-pin']"
               style="margin-right: 10px"
             />
-            <span>Beijing , China</span>
+            <span>
+              {{ UserData.userAddress.userCity }} ,
+              {{ UserData.userAddress.userCountry }}</span
+            >
           </div>
           <p>Student</p>
         </div>
@@ -103,7 +112,7 @@
       <section class="timeline_about card">
         <div class="tabs">
           <ul>
-            <li class="timeline">
+            <li class="timeline active">
               <font-awesome-icon
                 :icon="['fas', 'eye']"
                 style="margin-right: 10px"
@@ -111,12 +120,22 @@
               <span>Timeline</span>
             </li>
 
-            <li class="about active">
+            <li class="about">
               <font-awesome-icon
                 :icon="['far', 'address-card']"
                 style="margin-right: 10px"
               />
               <span>About</span>
+            </li>
+
+            <li class="edit_profile">
+              <button class="edit_profile_btn" @click="showModal">
+                <font-awesome-icon
+                  :icon="['fas', 'user-pen']"
+                  style="margin-right: 10px"
+                />
+                <span>Edit Profile</span>
+              </button>
             </li>
           </ul>
         </div>
@@ -126,25 +145,32 @@
           <ul>
             <li class="phone">
               <h1 class="label">Phone:</h1>
-              <span class="info">+92 333 122 901</span>
+              <span class="info">{{ UserData.userPhone }}</span>
+
+           
             </li>
 
             <li class="address">
               <h1 class="label">Address:</h1>
               <span class="info"
-                >Khayaban - e Ittehad <br />
-                Beijing, China 10651-78 156-187-60</span
+                >{{ UserData.userAddress.userStreet }} <br />
+                {{ UserData.userAddress.userCity }}
+                {{ UserData.userAddress.userCountry }}</span
               >
+             
             </li>
 
             <li class="email">
               <h1 class="label">E-mail:</h1>
-              <span class="info">syedkawsar121@hotmail.com</span>
+              <span class="info">{{ UserData.userEmail }}</span>
+           
             </li>
 
             <li class="site">
-              <h1 class="label">Site:</h1>
-              <span class="info">www.hotmail.com</span>
+              <h1 class="label">Password:</h1>
+              <span class="info">{{ UserData.userPassword }}</span>
+
+              
             </li>
           </ul>
         </div>
@@ -154,7 +180,7 @@
           <ul>
             <li class="birthday">
               <h1 class="label">Birthday:</h1>
-              <span class="info">Dec 25, 2000</span>
+              <span class="info">{{ UserData.userDOB }}</span>
             </li>
 
             <li class="sex">
@@ -165,22 +191,37 @@
         </div>
       </section>
     </div>
+    <!-- Modal  -->
   </body>
 </template>
   
 <script>
-// import { mapActions } from "vuex";
-
+import { mapGetters } from "vuex";
+import Modal from "../Modal/Modal.vue";
 export default {
   data() {
     return {
-      studentID: this.$store.getters.getStudentID,
+      isModalVisible: false,
     };
   },
   name: "UserProfile",
 
+  computed: mapGetters(["UserData"]),
+  components: {
+    Modal,
+  },
+
   mounted() {
     this.$store.dispatch("UserProfile");
+  },
+
+  methods: {
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    },
   },
 };
 </script>
@@ -485,24 +526,33 @@ header {
   display: flex;
   align-items: center;
   margin-bottom: 2.5rem;
+  
 }
 
-/* .timeline_about .tabs ul::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-    margin-right: 2rem;
+/* .timeline_about .tabs ul li .edit_profile_btn  {
+  font-size: 20px;
+  color: ree; */
+/* } */
+.edit_profile_btn {
+  background-color: #e6f2ff;
+  /* display: flex;
 
-  height: 1px;
-  background: (rgba(0, 0, 0, 0.2));
-} */
+  align-items: right; */
+  /* text-align: right; */
+  /* justify-content: right; */
+  border: none;
+  color: #0099cc;
+  padding: 5px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
 
 .timeline_about .tabs ul li {
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: right;
   margin-right: 2.5rem;
   padding-bottom: 0.8rem;
   cursor: pointer;
