@@ -2,6 +2,7 @@ package com.univent.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -9,6 +10,8 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -24,6 +27,10 @@ import lombok.NoArgsConstructor;
 public class Union {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.UUID)
+	@Column(name="Union_Id", nullable = false)
+	private UUID uniondId;
+
 	@Column(name="Union_name", nullable = false)
 	private String name;
 	
@@ -36,24 +43,50 @@ public class Union {
 	@Column(name="Vice_President" , nullable = false)
 	private String vicePresident;
 	
+	@Column(name="Coordinator" , nullable = false)
+	private String coordinator;
+	
+	@Column(name="Head_IT_Department" , nullable = false)
+	private String headITDept;
+	
+	@Column(name="Deputy_IT_Department" , nullable = false)
+	private String deputyITDept;
+
+	@Column(name="Head_Culture_Department" , nullable = false)
+	private String headCultureDept;
+
+	@Column(name="Deputy_Culture_Department" , nullable = false)
+	private String deputyCultureDept;
+
 	@Column(name="Secretary" , nullable = false)
 	private String secretary;
+
+	@Column(name="Head_Projects_Department" , nullable = false)
+	private String headProjectsDept;
+
+	@Column(name="Deputy_Projects_Department" , nullable = false)
+	private String deputyProjectsDept;
+
+	@Column(name="Head_PR_Department" , nullable = false)
+	private String headPRDept;
+
+	@Column(name="Deputy_PR_Department" , nullable = false)
+	private String deputyPRDept;
 	
-	@Column(name="Treasurer" , nullable = false)
-	private String treasurer;
+	@Column(name="Head_Sports_Department" , nullable = false)
+	private String headSportsDept;
 
-	@Column(name="P&M_Relations" , nullable = false)
-	private String pmRelations;
-
-	@Column(name="Academics_Officer" , nullable = false)
-	private String academicsOfficer;
-
-	@Column(name="Sports_Officer" , nullable = false)
-	private String sportsOfficer;
+	@Column(name="Deputy_Sports_Department" , nullable = false)
+	private String deputySportsDept;
 	
-	@OneToMany(fetch = FetchType.LAZY,
+	@Column(name="Union_Image" , nullable = true)
+	private byte[] unionImage;
+	
+	@OneToMany(fetch = FetchType.EAGER,
 	cascade =  CascadeType.ALL,
 	mappedBy = "union")
 	@JsonIgnoreProperties("union")
 	private List<Event> event = new ArrayList<>();
+
+
 }
