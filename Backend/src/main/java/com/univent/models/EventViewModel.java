@@ -1,16 +1,24 @@
 package com.univent.models;
 
+import java.sql.Time;
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class EventViewModel {
 	
 	private String name;
 	private String eventType;
 	private String guestName;
 	private String venue;
-	private Date date;
+	private String meetLink;
+	private Date regDeadline;
+	private Date eventDate;
+	private Time eventTime;
 	private String unionName;
 }

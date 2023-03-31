@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.univent.models.Union;
+import com.univent.models.UnionViewModel;
 import com.univent.repositories.EventRepository;
 import com.univent.repositories.UnionRepository;
 
@@ -29,10 +30,30 @@ public class UnionController {
 	//http://localhost:8080/api/union/addUnion
 	@CrossOrigin(origins = "http://localhost:8081")
 	@PostMapping("/addUnion")
-	public ResponseEntity<Object> addUnion(@RequestBody Union union){
+	public ResponseEntity<Object> addUnion(@RequestBody UnionViewModel union){
 		try {
-		if(!(unionRepository.existsById(union.getName()))){
-				return new ResponseEntity<Object>(unionRepository.save(union),HttpStatus.CREATED);
+		if(!(unionRepository.existsByName(union.getName()))){
+				Union newUnion = new Union(null ,
+						union.getName() ,
+						union.getAnnouncement(),
+						union.getPresident(),
+						union.getVicePresident(),
+						union.getCoordinator(),
+						union.getHeadITDept(),
+						union.getDeputyITDept(),
+						union.getHeadCultureDept(),
+						union.getDeputyCultureDept(),
+						union.getSecretary(),
+						union.getHeadProjectsDept(),
+						union.getDeputyProjectsDept(),
+						union.getHeadPRDept(),
+						union.getDeputyPRDept(),
+						union.getHeadSportsDept(),
+						union.getDeputySportsDept(),
+						null, 
+						null);
+				
+				return new ResponseEntity<Object>(unionRepository.save(newUnion),HttpStatus.CREATED);
 		}
 		else
 				return new ResponseEntity<Object>(HttpStatus.FOUND);
@@ -47,7 +68,7 @@ public class UnionController {
     @CrossOrigin(origins = "http://localhost:8081")
 	@GetMapping("/getUnion")
     public ResponseEntity<Object> getUnion(@RequestParam(name="name") String name){
-    	Optional<Union> union = unionRepository.findById(name);
+    	Optional<Union> union = unionRepository.findByName(name);
     	try {
     	return new ResponseEntity<Object>(union.get(), HttpStatus.OK);
     	}
@@ -56,4 +77,5 @@ public class UnionController {
     	}
     }
 	
+    
 }

@@ -1,8 +1,14 @@
 package com.univent.models;
 
+import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -11,6 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,12 +47,31 @@ public class Event {
 	@Column(name="Venue" , nullable=false)
 	private String venue;
 	
-	@Column(name="Date" , nullable=false)
-	private Date date;
+	@Column(name="Meeting_Link" , nullable=true)
+	private String meetLink;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@Column(name="Registration_Deadline" , nullable=false)
+	private Date regDeadline;
+	
+	@Column(name="Event_Date" , nullable=false)
+	private Date eventDate;
+	
+	@Column(name="Event_Time" , nullable=false)
+	private Time eventTime;
+	
+	@Column(name="Event_Image" , nullable = true)
+	private byte[] eventImage;
+	
+
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "Union_name", nullable = false)
     private Union union;
+	
+	@OneToMany(fetch = FetchType.LAZY,
+			cascade =  CascadeType.ALL,
+			mappedBy = "event")
+	@JsonIgnoreProperties("event")
+	private List<Registration> registration = new ArrayList<>();
 
 	
 	
