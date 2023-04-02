@@ -63,7 +63,21 @@ public class UnionController {
 	}
 	
 	
-	//Get Union Profile
+	//Get ALL Unions
+    //http://localhost:8080/api/union/getAllUnions
+    @CrossOrigin(origins = "http://localhost:8081")
+	@GetMapping("/getAllUnions")
+    public ResponseEntity<Object> getAllUnions(){
+    	try {
+    	return new ResponseEntity<Object>(unionRepository.findAll(), HttpStatus.OK);
+    	}
+    	catch(Exception ex) {
+    		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex);
+    	}
+    }
+    
+    
+    //Get Union Profile
     //http://localhost:8080/api/union/getUnion?name=ACM
     @CrossOrigin(origins = "http://localhost:8081")
 	@GetMapping("/getUnion")
