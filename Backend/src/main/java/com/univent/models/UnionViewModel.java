@@ -24,5 +24,7 @@ public class UnionViewModel {
 	private String deputyPRDept;	
 	private String headSportsDept;
 	private String deputySportsDept;
+	private String unionImage;
+
 
 }

@@ -29,7 +29,6 @@ public class EventController {
 	
 	
 	
-	/* ADD IMAGES KA FEATURE DALNA HAI BAAD MAI*/
 	//Add Event Method
 	//http://localhost:8080/api/event/addEvent
 	@CrossOrigin(origins = "http://localhost:8081")
@@ -43,6 +42,7 @@ public class EventController {
 			if(union!=null) {
 				Event newEvent = new Event(null ,
 						eventViewModel.getName() ,
+						eventViewModel.getDesc(),
 						eventViewModel.getEventType() ,
 						eventViewModel.getGuestName() ,
 						eventViewModel.getVenue() ,
@@ -50,7 +50,7 @@ public class EventController {
 						eventViewModel.getRegDeadline() ,
 						eventViewModel.getEventDate() ,
 						eventViewModel.getEventTime(),
-						null,
+						eventViewModel.getEventImage(),
 						union.get(),
 						null);
 				if(event.isEmpty())

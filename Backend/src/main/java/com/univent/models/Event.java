@@ -38,6 +38,9 @@ public class Event {
 	@Column(name="Name" , nullable=false)
 	private String name;
 	
+	@Column(name="Description" , length=1000, nullable = true)
+	private String Desc;
+	
 	@Column(name="Event_type" , nullable=false)
 	private String eventType;
 	
@@ -60,7 +63,7 @@ public class Event {
 	private Time eventTime;
 	
 	@Column(name="Event_Image" , nullable = true)
-	private byte[] eventImage;
+	private String eventImage;
 	
 
 	@ManyToOne(fetch = FetchType.EAGER)

@@ -50,7 +50,7 @@ public class UnionController {
 						union.getDeputyPRDept(),
 						union.getHeadSportsDept(),
 						union.getDeputySportsDept(),
-						null, 
+						union.getUnionImage(), 
 						null);
 				
 				return new ResponseEntity<Object>(unionRepository.save(newUnion),HttpStatus.CREATED);

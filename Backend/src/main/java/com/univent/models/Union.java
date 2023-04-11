@@ -34,7 +34,7 @@ public class Union {
 	@Column(name="Union_name", nullable = false)
 	private String name;
 	
-	@Column(name="Announcement" , nullable = true)
+	@Column(name="Announcement" , length=1000, nullable = true)
 	private String announcement;
 	
 	@Column(name="President" , nullable = false)
@@ -80,7 +80,7 @@ public class Union {
 	private String deputySportsDept;
 	
 	@Column(name="Union_Image" , nullable = true)
-	private byte[] unionImage;
+	private String unionImage;
 	
 	@OneToMany(fetch = FetchType.EAGER,
 	cascade =  CascadeType.ALL,
