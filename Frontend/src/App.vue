@@ -15,3 +15,10 @@ export default {
 
 };
 </script>
+
+<style >
+* {
+  font-family: 'DM sans', sans-serif;
+  font-weight: 800;
+}
+</style>

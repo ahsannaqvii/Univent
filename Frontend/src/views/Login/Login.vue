@@ -24,7 +24,6 @@
             :rules="[rules.required, rules.email]"
             v-model.trim="email"
             outlined
-            filled
           />
           <v-text-field
             class="text-field"
@@ -36,18 +35,24 @@
             counter
             maxlength="25"
             outlined
-            filled
           />
           <!-- icon="close" -->
-          <v-alert      :value="error"
-            color="error" style="color:red" >
-          The username or the password is incorrect
+          <v-alert :value="error" color="error" style="color: red">
+            The username or the password is incorrect
           </v-alert>
-          <button type="submit" class="signinbtn" @click.prevent="login">SIGN IN</button>
+          <button type="submit" class="signinbtn" @click.prevent="login">
+            SIGN IN
+          </button>
         </v-form>
       </div>
       <div class="overlay-container">
-        <div class="overlay"></div>
+        <div class="overlay">
+          <iframe
+            src="https://drive.google.com/file/d/1rJbqXiEkltUUDnHNNj15iAnD_zp4jZf2/preview"
+            width="630"
+            height="490"
+          ></iframe>
+        </div>
       </div>
     </div>
   </section>
@@ -55,7 +60,6 @@
 
 <script>
 import rules from "@/rules";
-// import { mapGetters,  mapActions} from 'vuex'
 export default {
   name: "Login",
 
@@ -66,17 +70,17 @@ export default {
     error: false,
   }),
   methods: {
-    
-    login(){
-      this.$store.dispatch("Login", {
-        email: this.email,
-        password: this.password,
-        id:"334445554555543",
-        name:"Ajar"
-      }).then(success => this.$router.push("/Home")).catch(error => this.error=true);
-    }
+    login() {
+      console.log(this.$store);
+      this.$store
+        .dispatch("Login", {
+          email: this.email,
+          password: this.password,
+        })
+        .then((success) => this.$router.push("/"))
+        .catch((error) => (this.error = true));
+    },
   },
-
 };
 </script>
 
@@ -228,8 +232,9 @@ form {
   transition: transform 0.6s ease-in-out;
   z-index: 100;
 }
+/* https://lh3.googleusercontent.com/xDzC2ZeRigVnqBR5CeusCgW03MMG2EoVDrqrLbXmqxHK8L119IHt6N5cB8KF8D33So8Imh-ShdPsJ6jNXN1nHow7z72xfJbp24R6DWmW_yzrniTHx0Om-5x1znlA5LHiUu7ekOcdY6X_ndBjPDVTEzL-MziuK84YeguZ1pHzs28GZgQuxpBIAHRIQ49OpKiIpLHIDicZf4fFpa6bWD6rB-Bw93FWAUqrRB_bD72OUedpWDE1lkNlYZlJWzHEUgZnS1cfsu7TrIEVHX2jqpbrA8LQZbKFSGSsxyPYEL7iaEeCXDZlwGqgC5EoftoSThZkMSyT9AFJLVmUgASwqrFSWcXHPBnh18-3yG9_A610J-3sj-TbPyx-0oeuefY8KqtDFKdwuSQB_WHOLDJ2hNeM1cvdDIBGRhGcp2iFJpPMDIn_HlkAfFkzen1hS1OfMMeXBKhfkIQ_RYCMER8hUmCECR6rNy8R9agUBk0xT1estpj3Zg3PL7Tukt3lmdsyfEQioDqhJKtG_d2iavKhHi69P-g6S82_wslmt0pG_J0EGlG2ZPH1xDITaxBEnxPTxGbvxnSZCs4FRFiXew5eI9fqmWllk2_r7oB4jhYV0yja7rA76wgkyVXo9ozZpHmyQDjp4B9iZdha2zkixHqBPU219meZRotfjYoYKP5Rvlf9ppRp6-F83AaKmNo_VqXO8JbH5yTOB146qZ9NCYq0c51E3SwkRCtT3sjL0UZEjNOhjY4WtkcL4kJjcUtAsSV4k6Y3x2luXLyxDOhTJml9LKT6lEX8Rf6mi4pmTVfdim_EP-y-mDMrU1ze6dBIn-Vtv3GM6YP5Sh31gizLm1Ix8VM2vihOJtwqQk64p4Uz2EbI4VKqTHGzjj_AJy8n6JHrlLFfjrkyLozKVa4xTh7A9s5R8akVJT5iz8-w0_SX0LMe9NAhgKDfy1XUe2qiDsM742PNqkY4qLmw5hSjqz3Ttn8K=w1027-h800-no?authuser=0.png */
 .overlay {
-  background-image: url("https://lh3.googleusercontent.com/xDzC2ZeRigVnqBR5CeusCgW03MMG2EoVDrqrLbXmqxHK8L119IHt6N5cB8KF8D33So8Imh-ShdPsJ6jNXN1nHow7z72xfJbp24R6DWmW_yzrniTHx0Om-5x1znlA5LHiUu7ekOcdY6X_ndBjPDVTEzL-MziuK84YeguZ1pHzs28GZgQuxpBIAHRIQ49OpKiIpLHIDicZf4fFpa6bWD6rB-Bw93FWAUqrRB_bD72OUedpWDE1lkNlYZlJWzHEUgZnS1cfsu7TrIEVHX2jqpbrA8LQZbKFSGSsxyPYEL7iaEeCXDZlwGqgC5EoftoSThZkMSyT9AFJLVmUgASwqrFSWcXHPBnh18-3yG9_A610J-3sj-TbPyx-0oeuefY8KqtDFKdwuSQB_WHOLDJ2hNeM1cvdDIBGRhGcp2iFJpPMDIn_HlkAfFkzen1hS1OfMMeXBKhfkIQ_RYCMER8hUmCECR6rNy8R9agUBk0xT1estpj3Zg3PL7Tukt3lmdsyfEQioDqhJKtG_d2iavKhHi69P-g6S82_wslmt0pG_J0EGlG2ZPH1xDITaxBEnxPTxGbvxnSZCs4FRFiXew5eI9fqmWllk2_r7oB4jhYV0yja7rA76wgkyVXo9ozZpHmyQDjp4B9iZdha2zkixHqBPU219meZRotfjYoYKP5Rvlf9ppRp6-F83AaKmNo_VqXO8JbH5yTOB146qZ9NCYq0c51E3SwkRCtT3sjL0UZEjNOhjY4WtkcL4kJjcUtAsSV4k6Y3x2luXLyxDOhTJml9LKT6lEX8Rf6mi4pmTVfdim_EP-y-mDMrU1ze6dBIn-Vtv3GM6YP5Sh31gizLm1Ix8VM2vihOJtwqQk64p4Uz2EbI4VKqTHGzjj_AJy8n6JHrlLFfjrkyLozKVa4xTh7A9s5R8akVJT5iz8-w0_SX0LMe9NAhgKDfy1XUe2qiDsM742PNqkY4qLmw5hSjqz3Ttn8K=w1027-h800-no?authuser=0.png");
+  background-image: url("https://drive.google.com/file/d/1rJbqXiEkltUUDnHNNj15iAnD_zp4jZf2/view?usp=share_link");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: 0 0;

@@ -2,12 +2,9 @@
   <body>
     <Modal v-show="isModalVisible" @close="closeModal" />
 
-    <!-- ===== ===== Body Main-Background ===== ===== -->
     <span class="main_bg"></span>
 
-    <!-- ===== ===== Main-Container ===== ===== -->
     <div class="container">
-      <!-- ===== ===== Header/Navbar ===== ===== -->
       <header>
         <div class="brandLogo">
           <figure>
@@ -18,7 +15,7 @@
               height="40px"
             />
           </figure>
-          <span>University of China</span>
+          <span>South China University of Technology </span>
         </div>
       </header>
       <section class="userProfile card">
@@ -34,9 +31,7 @@
         </div>
       </section>
 
-      <!-- ===== ===== Work & Skills Section ===== ===== -->
       <section class="work_skills card">
-        <!-- ===== ===== Work Contaienr ===== ===== -->
         <div class="work">
           <h1 class="heading">work</h1>
           <div class="primary">
@@ -146,8 +141,6 @@
             <li class="phone">
               <h1 class="label">Phone:</h1>
               <span class="info">{{ UserData.userPhone }}</span>
-
-           
             </li>
 
             <li class="address">
@@ -157,20 +150,16 @@
                 {{ UserData.userAddress.userCity }}
                 {{ UserData.userAddress.userCountry }}</span
               >
-             
             </li>
 
             <li class="email">
               <h1 class="label">E-mail:</h1>
               <span class="info">{{ UserData.userEmail }}</span>
-           
             </li>
 
             <li class="site">
               <h1 class="label">Password:</h1>
               <span class="info">{{ UserData.userPassword }}</span>
-
-              
             </li>
           </ul>
         </div>
@@ -526,7 +515,6 @@ header {
   display: flex;
   align-items: center;
   margin-bottom: 2.5rem;
-  
 }
 
 /* .timeline_about .tabs ul li .edit_profile_btn  {
@@ -535,11 +523,7 @@ header {
 /* } */
 .edit_profile_btn {
   background-color: #e6f2ff;
-  /* display: flex;
 
-  align-items: right; */
-  /* text-align: right; */
-  /* justify-content: right; */
   border: none;
   color: #0099cc;
   padding: 5px 20px;

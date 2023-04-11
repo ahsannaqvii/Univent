@@ -1,21 +1,25 @@
 <template>
   <header>
     <div class="university_icon">
-      <!-- <img src="https://i.ibb.co/vYBFTD9/image2vector.png" class="logo" alt="university_logo" /> -->
       <h2 style="color: white">
-        <router-link to="/" class="main_heading">UNIVERSITY OF CHINA</router-link>
+        <router-link
+          to="/"
+          style="text-transform: uppercase"
+          >South China University of Technology</router-link
+        >
       </h2>
     </div>
     <nav>
       <ul class="nav__links">
-        <li><router-link to="">SOCIETIES</router-link></li>
-        <li><router-link to="">EVENTS</router-link></li>
+        <li><router-link to="">UNION</router-link></li>
+        <li><router-link to="/Event">EVENTS</router-link></li>
 
         <li><router-link to="/UserProfile">USER PROFILE</router-link></li>
       </ul>
     </nav>
-    <router-link to="" class="signoutbtn">SIGN OUT</router-link>
+    <router-link to="/Login" class="signoutbtn">SIGN OUT</router-link>
   </header>
+  
 </template>
   
   <script>
@@ -29,18 +33,17 @@ export default {
   font-family: "Poppins", sans-serif;
   font-weight: bold;
 }
-.main_heading{
-  font-size: 20px;
-}
+
+
 header {
   box-sizing: border-box;
   margin: 0;
   background-color: #001233;
   display: flex;
-  height: 45px;
+  height: 60px;
   justify-content: space-between;
   align-items: center;
-  /* padding: 0.5em 4em 0em; */
+
 }
 
 li,
