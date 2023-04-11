@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class EventViewModel {
 	
 	private String name;
+	private String desc;
 	private String eventType;
 	private String guestName;
 	private String venue;
@@ -20,5 +21,6 @@ public class EventViewModel {
 	private Date regDeadline;
 	private Date eventDate;
 	private Time eventTime;
+	private String eventImage;
 	private String unionName;
 }
