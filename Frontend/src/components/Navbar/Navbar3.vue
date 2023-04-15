@@ -1,169 +1,82 @@
-<!-- THIS IS SMU NAVBAR  -->
-
 <template>
-  <header role="site-header" id="header" class="site-header">
-    <div class="container-fluid">
-      <div id="header-two" class="header-shadow header-two obg-site row">
-        <div class="navbar-header-container container">
-          <div class="navbar-header branding d-flex align-items-center">
-            <div class="site-branding mr-auto">
-              <div class="ob-smu-logo">
-                <a
-                  target="_blank"
-                  href="//www.smu.edu.sg"
-                  rel="home"
-                  title="Singapore Management University (SMU)"
-                  name="top"
-                  ><img
-                    class="ob-smulogo ob-smulogo-d d-none d-lg-inline-block"
-                    alt="Singapore Management University (SMU)"
-                    src="../../assets/navbar/logo-d-smu.svg"
-                    width="153"
-                    height="60" /><img
-                    class="ob-smulogo ob-smulogo-t d-none d-md-inline-block d-lg-none"
-                    alt="Singapore Management University (SMU)"
-                    src="../../assets/navbar/logo-t-smu.svg"
-                    width="113"
-                    height="60" /><img
-                    class="ob-smulogo ob-smulogo-m d-inline-block d-md-none"
-                    alt="Singapore Management University (SMU)"
-                    src="../../assets/navbar/logo-m-smu.svg"
-                    width="37"
-                    height="48"
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-lg-2">
+          <div class="logo">
+            <a href="index.html">
+              <img src="./../../assets/navbar/SOC.jpeg" alt=""  />
+            </a>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-8">
+          <nav>
+            <ul>
+              <li>
+                <a class="active" href="index.html">Home</a>
+
+                <ul>
+                  <li><a href="index.html">Home 1</a></li>
+                  <li><a href="home-2.html">Home 2</a></li>
+                  <li><a href="home-3.html">Home 3</a></li>
+                </ul>
+              </li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="academics.html">Academics</a></li>
+              <li><a href="discover.html">Discover</a></li>
+              <li><a href="history.html">History</a></li>
+              <li>
+                <a href="#">Pages</a>
+                <ul>
+                  <li><a href="apply.html">Apply</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="news.html">News</a>
+                <ul>
+                  <li><a href="news.html">News</a></li>
+                  <li><a href="news-single.html">News Single</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+          <div class="mobile-menu">
+            <i class="ti-menu"></i>
+            <i class="ti-close"></i>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-2">
+          <div class="social-icon">
+            <ul>
+              <li>
+                <a href="#"><i class="ti-instagram"></i></a>
+                <font-awesome-icon class="icon" :icon="['fab', 'instagram']" />
+              </li>
+              <li>
+                <a href="#"
+                  ><font-awesome-icon class="icon" :icon="['fab', 'facebook']"
                 /></a>
-              </div>
-              <div class="ob-oblique">
-                <img src="/themes/smubase_4g/svg/oblique.svg" />
-              </div>
-            </div>
-
-            <div
-              id="branding-subheader"
-              class="branding-subheader d-none d-lg-inline-block ml-auto"
-            >
-              <div class="mr-lg-3 mr-1 block block--basic block--topnavi">
-                <div>
-                  <form
-                    action="/search/node"
-                    class="search-form search-form-hidden"
-                  >
-                    <input
-                      name="keys"
-                      type="text"
-                      id="search"
-                      class="search-field mr-1 search-field-hidden"
-                      placeholder="Search..."
-                    />
-                    <i class="fas fa-times search-close d-none"></i>
-                  </form>
-                  <a class="cta cta-silver mr-1 search-btn d-flex"
-                    ><i class="fas fa-search"></i>
-                  </a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="d-lg-block d-none block block--mainnavigation-2">
-                <nav
-                  class="tbm tbm-main tbm-arrows"
-                  id="tbm-main"
-                  data-breakpoint="980"
-                  aria-label="main navigation"
-                >
-                  <button class="tbm-button" type="button">
-                    <span class="tbm-button-container">
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                    </span>
-                  </button>
-                  <div class="tbm-collapse always-show">
-                    <ul class="tbm-nav level-0 items-7" role="list">
-                      <li class="tbm-item level-1" aria-level="1">
-                        <div class="tbm-link-container">
-                          <a href="/programmes" class="tbm-link level-1">
-                            Programmes
-                          </a>
-                        </div>
-                      </li>
-
-                      <li class="tbm-item level-1" aria-level="1">
-                        <div class="tbm-link-container">
-                          <a
-                            href="/schools-institutes"
-                            class="tbm-link level-1"
-                          >
-                            Schools &amp; Institutes
-                          </a>
-                        </div>
-                      </li>
-
-                      <li class="tbm-item level-1" aria-level="1">
-                        <div class="tbm-link-container">
-                          <a href="/research" class="tbm-link level-1">
-                            Research
-                          </a>
-                        </div>
-                      </li>
-
-                      <li
-                        class="tbm-item level-1 dropdown-column tbm-item--has-dropdown active active-trail"
-                        aria-level="1"
-                      >
-                        <div class="tbm-link-container">
-                          <span
-                            class="tbm-link level-1 no-link tbm-toggle active-trail"
-                            tabindex="0"
-                            aria-expanded="false"
-                          >
-                            Campus Life
-                          </span>
-                        </div>
-                      </li>
-
-                      <li class="tbm-item level-1" aria-level="1">
-                        <div class="tbm-link-container">
-                          <a href="/partnerships" class="tbm-link level-1">
-                            Partnerships
-                          </a>
-                        </div>
-                      </li>
-
-                      <li
-                        class="tbm-item level-1 tbm-left tbm-item--has-dropdown open"
-                        aria-level="1"
-                      >
-                        <div class="tbm-link-container">
-                          <span
-                            class="tbm-link level-1 no-link tbm-toggle"
-                            tabindex="0"
-                            aria-expanded="true"
-                          >
-                            About
-                          </span>
-                        </div>
-                      </li>
-
-                      <li
-                        class="tbm-item level-1 tbm-left tbm-item--has-dropdown"
-                        aria-level="1"
-                      >
-                        <div class="tbm-link-container">
-                          <span
-                            class="tbm-link level-1 no-link tbm-toggle"
-                            tabindex="0"
-                            aria-expanded="false"
-                          >
-                            Connect
-                          </span>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </nav>
-              </div>
-            </div>
+              </li>
+              <li>
+                <a href="#"
+                  ><font-awesome-icon class="icon" :icon="['fab', 'google']"
+                /></a>
+              </li>
+              <li>
+                <a href="#"
+                  ><font-awesome-icon class="icon" :icon="['fab', 'twitter']"
+                /></a>
+              </li>
+              <li class="search-icon">
+                <!-- <a href="#"
+                  ><font-awesome-icon class="icon-search" :icon="['fas', 'search']"
+                /></a> -->
+              </li>
+            </ul>
+          </div>
+          <div class="search">
+            <input type="search" placeholder="Search..." />
+            <i class="ti-close"></i>
           </div>
         </div>
       </div>
@@ -171,239 +84,196 @@
   </header>
 </template>
 
-<script>
-export default {
-  name: "Navbar",
-};
-</script>
-
 <style scoped>
-#header {
-  position: relative;
-  z-index: 99;
+.icon {
+  padding-left: 20px;
 }
-.container-fluid {
+.icon-search {
+  display: flex;
+}
+header {
+  /* background-color: rgba(255, 255, 255, 0.45); */
+  background-color:white;
+  position: absolute;
   width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
+  z-index: 999;
+  display: block;
+  height: 100px;
 }
 
-.not-front #header #header-two.obg-site {
-  background-color: #151c55;
+/* a {
+  text-decoration: none;
+} */
+a:hover {
+  color:#d74d52;
+  text-decoration: underline;
 }
-#header #header-two {
-  -webkit-box-shadow: 0 5px 10px -4px rgba(0, 0, 0, 0.5);
-  box-shadow: 0 5px 10px -4px rgba(0, 0, 0, 0.5);
+
+/* a,
+a:after,
+a:before {
+  color: #192836;
+  transition: all 0.4s ease-in-out;
+}
+
+a:visited,
+a:focus,
+a:active {
+  text-decoration: none;
+  outline: none;
+} */
+a {
+  color: black;
+  background-color: transparent;
+}
+img {
+  max-width: 100%;
+  height: 4.4rem;
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+nav {
+  text-align: center;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+nav li {
+  display: inline-block;
   position: relative;
 }
-
-#header #header-two .navbar-header-container {
-  position: relative;
-  height: auto;
+ul li {
+  list-style: none;
+}
+ul li a {
+  padding: 10px 0;
 }
 
+/* -------------------------------------  */
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #0087ca;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
 .container {
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-}
-.align-items-center {
-  -webkit-box-align: center !important;
-  align-items: center !important;
-}
-.d-flex {
-  display: -webkit-box !important;
-  display: flex !important;
-}
-#header #header-two .navbar-header-container .site-branding {
-  white-space: nowrap;
-  position: relative;
-}
-
-.mr-auto,
-.mx-auto {
-  margin-right: auto !important;
-}
-#header #header-two .navbar-header-container .ob-smu-logo,
-#header #header-two .navbar-header-container .ob-bu-logo,
-#header #header-two .navbar-header-container .ob-oblique {
-  display: inline-block;
-}
-#header #header-two .navbar-header-container .ob-smu-logo,
-#header #header-two .navbar-header-container .ob-bu-logo {
-  background: #fff;
-  padding-right: 15px;
-}
-
-#header #header-two .navbar-header-container .ob-smu-logo a,
-#header #header-two .navbar-header-container .ob-bu-logo a {
-  padding: 15px 0;
-  display: inline-block;
-}
-
-a {
-  color: #8a704c;
-  font-weight: 600;
-}
-#header .ob-smulogo {
-  height: 77px;
-  width: auto;
-}
-img {
-  vertical-align: middle;
-  border-style: none;
-}
-img {
-  overflow-clip-margin: content-box;
-  overflow: clip;
-}
-#header #header-two .navbar-header-container .ob-oblique {
-  display: inline-block;
-}
-
-#header #header-two .ob-oblique {
-  margin-left: -1px;
-}
-#header #header-two .navbar-header-container .ob-oblique img {
-  width: auto;
-  height: 107px !important;
-}
-
-element.style {
-}
-#header #header-two .navbar-header-container .ob-oblique img {
-  width: auto;
-  height: 107px !important;
-}
-/* //remove later  */
-#header #header-two .navbar-header-container .ob-oblique img {
-  width: 30px;
-  height: 80px;
-}
-#header #header-two .branding-subheader {
-  max-width: none;
-}
-
-#header #branding-subheader {
-  transition: all 0.3s ease-in-out;
-}
-div#branding-subheader {
-  display: -webkit-box !important;
-  display: -ms-flexbox !important;
-  display: flex !important;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-align: end;
-  -ms-flex-align: end;
-  align-items: flex-end;
-  height: 100%;
-}
-
-#header .block--topnavi {
-    opacity: 1;
-    -webkit-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
-    top: 7px;
-    position: relative;
-}
-
-/* SEARCH ICON  */
-.search-form-hidden, .search-btn-hidden {
-    display: none !important;
-}
-.search-form {
-    position: relative;
-}
-form {
-    display: block;
-    margin-top: 0em;
-}
-
-.search-form .search-field.search-field-hidden {
-    width: 0;
-    opacity: 0;
-}
-.search-form .search-field {
-    border-radius: 5px;
-    padding: 0.36rem 1.75rem 0.36rem 0.75rem !important;
-    border: 0;
-    height: 37px;
-    width: 200px;
-    opacity: 1;
-    -webkit-transition: all .3s ease-in-out;
-    transition: all .3s ease-in-out;
-}
-button, input {
-    overflow: visible;
-}
-input, button, select, optgroup, textarea {
-    margin: 0;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
+  /* margin-right:0; */
 }
 .row {
-    display: -webkit-box;
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-right: -15px;
+  margin-left: -15px;
 }
-.search-form .search-close {
-    position: absolute;
-    z-index: 9;
-    color: #000;
-    right: 1rem;
-    top: 50%;
-    -webkit-transform: translatey(-50%);
-    transform: translatey(-50%);
-    cursor: pointer;
+.logo {
+  position: absolute;
+  z-index: 99;
 }
-.d-none {
-    display: none !important;
+.home-3 .gallery-carousel .item:after,
+.home-3 .search {
+  background: #d74d52cf;
 }
-.fa, .fas {
-    font-weight: 900;
+.search {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #d74d52f2;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  z-index: 99;
 }
-.tbm {
-    background-color: transparent;
-    margin-top: 10px;
-    margin-right: 1rem;
+.home-3 .search input {
+  border-color: #fff;
 }
-
-.tbm {
-    background-color: #f5f5f5;
+.search input {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 0;
+  width: 70%;
+  height: 10%;
+  padding: 0 20px;
+  font-size: 20px;
+  letter-spacing: 1px;
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
 }
-.tbm {
-    position: relative;
+[type="search"] {
+  outline-offset: -2px;
+  -webkit-appearance: none;
 }
-.tbm .tbm-nav, .tbm .dropdown-menu {
-    float: none !important;
+button,
+input {
+  overflow: visible;
 }
-.tbm .tbm-nav>li {
-    padding: 0 !important;
-    border: 0;
+.social-icon li {
+  display: inline-block;
 }
-
-.tbm-item.level-1 {
-    border-right: 1px solid rgba(0,0,0,0.2);
+.home-3 nav .active,
+.home-3 nav .active:before,
+.home-3 .our-value .item a:hover {
+  color: #d74d52;
 }
-.tbm-item.level-1 {
-    position: relative;
-    z-index: 1;
+nav .active,
+nav .active:before {
+  color: #d74d52;
 }
-
-li, table tfoot tr td, table tbody tr td, table thead tr th {
-    font-size: 1rem;
-    font-family: "Open Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-    color: #000;
+nav a {
+  font-weight: 700;
+  text-transform: capitalize;
+  display: inline-block;
+  position: relative;
+  margin-right: 35px;
+  padding: 25px 0;
+  font-size: 14px;
+}
+/* nav a:after {
+  background: #d74d52;
+} */
+nav ul li > ul {
+  position: absolute;
+  top: 150%;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  text-align: left;
+  min-width: 138px;
+  padding: 10px 0;
+  background: #ffffffd9;
+  transition: all 0.4s ease-in-out;
 }
 </style>

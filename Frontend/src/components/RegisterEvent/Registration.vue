@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <form class="form-right" method="post">
+    <form class="form-right">
       <h2>Registration form</h2>
       <div class="row">
         <div class="col-sm-6 mb-3">
@@ -24,10 +24,9 @@
 
           <v-text-field
             class="text-field"
-            type="email"
-            name="email"
+            type="text"
+            name="first_name"
             placeholder="Enter your first name"
-            v-model.trim="email"
             outlined
           />
         </div>
@@ -36,10 +35,9 @@
 
           <v-text-field
             class="text-field"
-            type="email"
-            name="email"
+            type="text"
+            name="last_name"
             placeholder="Enter your last name"
-            v-model.trim="email"
             outlined
           />
         </div>
@@ -49,10 +47,11 @@
           <label>Event ID</label>
           <v-text-field
             class="text-field"
-            type="email"
+            type="text"
             name="email"
             placeholder="Enter the event ID"
-            v-model.trim="email"
+            v-model.trim="id"
+            readonly
             outlined
           />
         </div>
@@ -60,10 +59,10 @@
           <label>Student ID</label>
           <v-text-field
             class="text-field"
-            type="email"
-            name="email"
+            type="text"
+            v-model="studentID"
+            name="studentID"
             placeholder="Enter your student ID"
-            v-model.trim="email"
             outlined
           />
         </div>
@@ -76,12 +75,15 @@
         </label>
       </div>
       <div class="form-field">
-        <input
+        <!-- <input
           type="submit"
           value="Register"
           class="register"
           name="register"
-        />
+        /> -->
+        <button class="register" @click.prevent="RegisterEvent">
+          Register
+        </button>
       </div>
     </form>
   </div>
@@ -90,13 +92,32 @@
 
 <script>
 export default {
-  name: "Registration",
+  name: "event-registration",
+
+  data: () => ({
+    id: null,
+    studentID: null,
+  }),
+  created() {
+    this.id = this.$route.params.eventId;
+    console.log(this.id);
+  },
+  methods: {
+    RegisterEvent() {
+      console.log(this.id, this.studentID);
+      this.$store.dispatch("EventRegistration", {
+        studentId: this.studentID,
+        eventId: this.id,
+      });
+    },
+  },
 };
 </script>
 
 <style scoped>
 .wrapper {
-  max-width: 1000px;
+  
+  max-width: 1200px;
   background-color: #fff;
   border-radius: 10px;
   position: relative;
@@ -107,11 +128,12 @@ export default {
 }
 
 .wrapper .form-left {
-  background: #001233;
+  background: #192836;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   padding: 20px 40px;
   position: relative;
+  height: 40rem;
   width: 100%;
   color: #fff;
 }
@@ -122,7 +144,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-items: center; */
+  align-items: center;
 }
 
 .wrapper h2 {
@@ -130,6 +152,7 @@ export default {
   text-transform: uppercase;
   font-size: 25px;
   padding: 5px 0 0;
+
   margin-bottom: 34px;
   pointer-events: none;
 }

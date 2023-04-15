@@ -21,4 +21,5 @@ export default {
   font-family: 'DM sans', sans-serif;
   font-weight: 800;
 }
+
 </style>

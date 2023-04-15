@@ -38,7 +38,7 @@ export default {
 header {
   box-sizing: border-box;
   margin: 0;
-  background-color: #001233;
+  background-color: #192836;
   display: flex;
   height: 60px;
   justify-content: space-between;

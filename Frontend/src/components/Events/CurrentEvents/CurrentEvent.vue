@@ -1,145 +1,159 @@
 <template>
-  <section class="events-section section-bg section-padding" id="section_4">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 col-12">
-          <h2 class="mb-lg-3">Upcoming Events</h2>
-        </div>
+  <v-app>
+    <section class="events-section section-bg section-padding" id="section_4">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-12 filter">
+            <h2>Upcoming Events</h2>
 
-        <div class="row custom-block mb-3">
-          <div class="col-lg-2 col-md-4 col-12 order-2 order-md-0 order-lg-0">
-            <div
-              class="custom-block-date-wrap d-flex d-lg-block d-md-block align-items-center mt-3 mt-lg-0 mt-md-0"
-            >
-              <h6 class="custom-block-date mb-lg-1 mb-0 me-3 me-lg-0 me-md-0">
-                24
-              </h6>
-
-              <strong class="text-white">Feb 2048</strong>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-8 col-12 order-1 order-lg-0">
-            <div class="custom-block-image-wrap">
-              <a href="event-detail.html">
-                <img
-                  src="./../../../assets/current-events/professional-golf-player.jpg"
-                  class="custom-block-image img-fluid"
-                  alt=""
-                />
-
-                <i class="custom-block-icon bi-link"></i>
-              </a>
-            </div>
-          </div>
-
-          <div class="col-lg-6 col-12 order-3 order-lg-0">
-            <div class="custom-block-info mt-2 mt-lg-0">
-              <a href="event-detail.html" class="events-title mb-3"
-                >Private activities</a
-              >
-
-              <p class="mb-0">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-
-              <div class="d-flex flex-wrap border-top mt-4 pt-3">
-                <div class="mb-4 mb-lg-0">
-                  <div class="d-flex flex-wrap align-items-center mb-1">
-                    <span class="custom-block-span">Location:</span>
-
-                    <p class="mb-0">National Center, NYC</p>
-                  </div>
-
-                  <div class="d-flex flex-wrap align-items-center">
-                    <span class="custom-block-span">Ticket:</span>
-
-                    <p class="mb-0">$250</p>
-                  </div>
-                </div>
-
-                <div class="d-flex align-items-center ms-lg-auto">
-                  <a href="event-detail.html" class="btn custom-btn"
-                    >Register Now</a
+            <div class="text-center">
+              <v-menu offset-y>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn dark v-bind="attrs" v-on="on">
+                    Filter Event
+                    <font-awesome-icon
+                      style="margin-left: 20px"
+                      :icon="['fas', 'filter']"
+                    />
+                  </v-btn>
+                </template>
+                <v-list>
+                  <v-list-item
+                    v-for="(item, index) in this.eventCategory"
+                    :key="index"
+                    @click="SelectEventCategory(item)"
                   >
-                </div>
+                    <v-list-item-title>{{ item }}</v-list-item-title>
+                  </v-list-item>
+                </v-list>
+              </v-menu>
+            </div>
+          </div>
+
+          <div
+            v-for="(currentEventInfo, index) in filteredEvents"
+            class="row custom-block mb-3"
+            :class="classObject"
+          >
+            <div class="col-lg-2 col-md-4 col-12 order-2 order-md-0 order-lg-0">
+              <div
+                class="custom-block-date-wrap d-flex d-lg-block d-md-block align-items-center mt-3 mt-lg-0 mt-md-0"
+              >
+                <h6 class="custom-block-date mb-lg-1 mb-0 me-3 me-lg-0 me-md-0">
+                  {{ currentEventInfo.eventDay }}
+                </h6>
+
+                <strong class="text-white">
+                  {{ currentEventInfo.eventMonth }} 2023
+                </strong>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div class="row custom-block custom-block-bg">
-          <div class="col-lg-2 col-md-4 col-12 order-2 order-md-0 order-lg-0">
-            <div
-              class="custom-block-date-wrap d-flex d-lg-block d-md-block align-items-center mt-3 mt-lg-0 mt-md-0"
-            >
-              <h6 class="custom-block-date mb-lg-1 mb-0 me-3 me-lg-0 me-md-0">
-                28
-              </h6>
+            <div class="col-lg-4 col-md-8 col-12 order-1 order-lg-0">
+              <div class="custom-block-image-wrap">
+                <a href="event-detail.html">
+                  <img
+                    src="./../../../assets/current-events/professional-golf-player.jpg"
+                    class="custom-block-image img-fluid"
+                    alt=""
+                  />
 
-              <strong class="text-white">Feb 2048</strong>
+                  <i class="custom-block-icon bi-link"></i>
+                </a>
+              </div>
             </div>
-          </div>
 
-          <div class="col-lg-4 col-md-8 col-12 order-1 order-lg-0">
-            <div class="custom-block-image-wrap">
-              <a href="event-detail.html">
-                <img
-                src="./../../../assets/current-events/golf.jpg"
-                  class="custom-block-image img-fluid"
-                  alt=""
-                />
+            <div class="col-lg-6 col-12 order-3 order-lg-0">
+              <div class="custom-block-info mt-2 mt-lg-0">
+                <a class="events-title mb-3" style="color: black">{{
+                  currentEventInfo.name
+                }}</a>
+                <p class="event-type">
+                  {{ currentEventInfo.eventType }}
+                </p>
 
-                <!-- <i class="custom-block-icon bi-link"></i> -->
-              </a>
-            </div>
-          </div>
+                <p class="mb-0">
+                  {{ currentEventInfo.desc }}
+                </p>
 
-          <div class="col-lg-6 col-12 order-3 order-lg-0">
-            <div class="custom-block-info mt-2 mt-lg-0">
-              <a href="event-detail.html" class="events-title mb-3"
-                >Group tournament activities</a
-              >
+                <div class="d-flex flex-wrap border-top mt-4 pt-3">
+                  <div class="mb-4 mb-lg-0">
+                    <div class="d-flex flex-wrap align-items-center mb-1">
+                      <span class="custom-block-span">Location:</span>
 
-              <p class="mb-0">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
+                      <p class="mb-0">{{ currentEventInfo.venue }}</p>
+                    </div>
 
-              <div class="d-flex flex-wrap border-top mt-4 pt-3">
-                <div class="mb-4 mb-lg-0">
-                  <div class="d-flex flex-wrap align-items-center mb-1">
-                    <span class="custom-block-span">Location:</span>
+                    <div class="d-flex flex-wrap align-items-center">
+                      <span class="custom-block-span">Guest Name:</span>
 
-                    <p class="mb-0">National Center, NYC</p>
+                      <p class="mb-0">{{ currentEventInfo.guestName }}</p>
+                    </div>
                   </div>
 
-                  <div class="d-flex flex-wrap align-items-center">
-                    <span class="custom-block-span">Ticket:</span>
-
-                    <p class="mb-0">$350</p>
+                  <div class="d-flex align-items-center ms-lg-auto">
+                    <router-link
+                      :to="'/event-registration/' + currentEventInfo.id"
+                      class="btn custom-btn"
+                      >Register Now</router-link
+                    >
                   </div>
-                </div>
-
-                <div class="d-flex align-items-center ms-lg-auto">
-                  <a href="/Registration" class="btn custom-btn"
-                    >Register Now</a
-                  >
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </v-app>
 </template>
 
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "CurrentEvent",
+  props: {
+    currentEvent: Array,
+  },
+  data: () => ({
+    isActive: true,
+    eventCategory: ["All Events"],
+    selectedEvent: null,
+  }),
+  methods: {
+    SelectEventCategory(item) {
+      this.selectedEvent = item;
+    },
+  },
+  computed: {
+    filteredEvents() {
+      if (this.selectedEvent === "All Events") {
+        return this.currentEvent;
+      }
+      if (this.selectedEvent != null) {
+        let filteredEventData = [];
+        filteredEventData = this.currentEvent.filter((event) => {
+          return event.eventType === this.selectedEvent;
+        });
+        return filteredEventData;
+      }
+      return this.currentEvent;
+    },
+
+    // FUNCTION DESIGN TO CATER CSS CLASS
+    classObject: function () {
+      this.isActive = !this.isActive;
+      return {
+        "custom-block-bg": !this.isActive,
+      };
+    },
+    ...mapGetters(["GetUniqueEventTypes"]),
+  },
+  mounted() {
+    this.eventCategory.push(...this.GetUniqueEventTypes);
+  },
 };
 </script>
 
@@ -229,6 +243,11 @@ strong {
   padding-top: 50px;
   padding-bottom: 50px;
 }
+.event-type {
+  color: grey;
+  font-weight: 800;
+  text-transform: uppercase;
+}
 .section-bg {
   background-color: #f4f1de;
 }
@@ -237,7 +256,16 @@ strong {
   margin-right: 5px;
   margin-left: 5px;
 }
-
+.v-list-item :hover {
+  cursor: pointer;
+}
+.filter {
+  display: flex;
+  justify-content: space-between;
+}
+.filter-btn {
+  color: grey;
+}
 .events-section.section-bg .container > .row .row {
   margin: auto;
 }
@@ -324,6 +352,4 @@ strong {
   border-color: #ffffff;
   color: #ffffff;
 }
-
-
 </style>

@@ -92,7 +92,6 @@ export default {
   align-items: center;
   flex-direction: column;
   height: 80vh;
-  /* margin: -20px 0 50px; */
 }
 .main-container {
   background-color: #fff;

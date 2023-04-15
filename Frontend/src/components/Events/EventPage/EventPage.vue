@@ -49,23 +49,28 @@
       </div>
     </header>
     <About />
-    <Pastevents />
-    <CurrentEvent/>
+    <Pastevents  />
+    <CurrentEvent :currentEvent="this.GetCurrentEvents" />
   </div>
 </template>
 
 
 <script>
+import { mapGetters } from "vuex";
+
 import Pastevents from "../PastEvents/Pastevents.vue";
-import About from "@/components/About/About.vue";
+import About from "@/components/AboutEvent/AboutEvent.vue";
 import CurrentEvent from "../CurrentEvents/CurrentEvent.vue";
 export default {
-  name: "Event",
+  name: "event-page",
   components: {
     Pastevents,
     CurrentEvent,
     About,
   },
+  computed: mapGetters(["GetCurrentEvents"]),
+
+  
 };
 </script>
 

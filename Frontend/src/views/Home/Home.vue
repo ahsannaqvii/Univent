@@ -100,7 +100,6 @@ export default {
   },
   mounted() {
     this.EventData();
-    console.log(this.GetEventData);
   },
   computed: mapGetters([
     "GetEventData",

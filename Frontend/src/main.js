@@ -13,6 +13,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
+
 import vuetify from './plugins/vuetify'
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
 import 'bootstrap-vue/dist/bootstrap-vue.css';

@@ -16,43 +16,50 @@
               </li>
             </ul>
             <div class="main-button-red">
-              <a style="color: white">All Upcoming Events</a>
+              <router-link to="/Event" style="text-transform: uppercase"
+                >ALL UPCOMING EVENTS</router-link
+              >
             </div>
           </div>
         </div>
         <div class="col-lg-8">
           <div class="row">
-            <div v-for="(eventInfo, index) in eventInfo" class="col-lg-6">
+            <!-- <div v-for="(eventInfo, index) in eventInfo" class="col-lg-6"> -->
+
+            <div v-for="i in 4" class="col-lg-6">
               <div class="event-item">
                 <div class="thumb">
-                  <div class="price">
-                  </div>
+                  <div class="price"></div>
                   <a
                     ><img
-                      :src=eventInfo.eventImage
+                      :src="eventInfo[i].eventImage"
                       alt="New Lecturer Events"
                   /></a>
                 </div>
                 <div class="down-content">
                   <div class="date">
                     <h6>
-                      {{ eventInfo.eventMonth }}
-                      <span>{{ eventInfo.eventDay }}</span>
+                      {{ eventInfo[i].eventMonth }}
+                      <span>{{ eventInfo[i].eventDay }}</span>
                     </h6>
                   </div>
-                  <a
-                    ><h4>{{ eventInfo.name }}</h4></a
+                  <router-link to="/Event"
+                    ><h4>{{ eventInfo[i].name }}</h4></router-link
                   >
                   <div>
                     <div class="container-data">
-                      <p><span>Event Type </span>{{ eventInfo.eventType }}</p>
+                      <p>
+                        <span>Event Type </span>{{ eventInfo[i].eventType }}
+                      </p>
 
-                      <p><span>Venue </span>{{ eventInfo.venue }}</p>
+                      <p><span>Venue </span>{{ eventInfo[i].venue }}</p>
                     </div>
                     <div class="container-data">
-                      <p><span>Guest Name </span>{{ eventInfo.guestName }}</p>
+                      <p>
+                        <span>Guest Name </span>{{ eventInfo[i].guestName }}
+                      </p>
 
-                      <p><span>Time </span>{{ eventInfo.eventTime }}</p>
+                      <p><span>Time </span>{{ eventInfo[i].eventTime }}</p>
                     </div>
                   </div>
                 </div>
@@ -67,12 +74,14 @@
 
 
 <script>
+
 export default {
   name: "EventInfo",
   props: {
     eventInfo: Array,
     GetUniqueEventTypes: Array,
   },
+
 };
 </script>
 
@@ -89,14 +98,14 @@ export default {
   max-width: 30%;
 }
 
-
-
 /*
 ---------------------------------------------
 upcoming events
 ---------------------------------------------
 */
-
+a:hover {
+  cursor: pointer;
+}
 section.upcoming-events {
   background-image: url(https://i.ibb.co/0VTtqN2/meetings-bg.jpg);
   background-position: center center;
@@ -153,6 +162,9 @@ section.upcoming-events .categories .main-button-red {
 section.upcoming-events .categories .main-button-red a {
   width: 100%;
   text-align: center;
+}
+section.upcoming-events .categories .main-button-red a:hover {
+  color: #ffad6c;
 }
 
 .event-item {
