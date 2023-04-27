@@ -29,15 +29,14 @@ public class Registration {
 	@GeneratedValue(strategy = GenerationType.UUID)
 	@Column(name="Registration_Id" , nullable=false)
 	private UUID regId;
-	
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY)
+
+
+	@ManyToOne
     @JoinColumn(name = "Student", nullable = false)
 
 	private Student student;
 	
-	@JsonIgnore
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
     @JoinColumn(name = "Event", nullable = false)
 
 	private Event event;

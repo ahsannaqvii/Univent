@@ -9,5 +9,5 @@ import com.univent.models.Registration;
 
 @Repository
 public interface RegistrationRepository extends JpaRepository<Registration , UUID> {
-
 }
+

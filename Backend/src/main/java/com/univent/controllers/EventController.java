@@ -42,7 +42,7 @@ public class EventController {
 			if(union!=null) {
 				Event newEvent = new Event(null ,
 						eventViewModel.getName() ,
-						eventViewModel.getDesc(),
+						eventViewModel.getDescription(),
 						eventViewModel.getEventType() ,
 						eventViewModel.getGuestName() ,
 						eventViewModel.getVenue() ,

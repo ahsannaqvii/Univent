@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
@@ -39,7 +40,7 @@ public class Event {
 	private String name;
 	
 	@Column(name="Description" , length=1000, nullable = true)
-	private String Desc;
+	private String description;
 	
 	@Column(name="Event_type" , nullable=false)
 	private String eventType;
@@ -70,6 +71,7 @@ public class Event {
     @JoinColumn(name = "Union_name", nullable = false)
     private Union union;
 	
+	//@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,
 			cascade =  CascadeType.ALL,
 			mappedBy = "event")
