@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class EventViewModel {
 	
 	private String name;
-	private String desc;
+	private String description;
 	private String eventType;
 	private String guestName;
 	private String venue;

@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
@@ -57,6 +58,7 @@ public class Student {
 	@JsonIgnoreProperties("student")
     private Address address;
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,
 			cascade =  CascadeType.ALL,
 			mappedBy = "student")

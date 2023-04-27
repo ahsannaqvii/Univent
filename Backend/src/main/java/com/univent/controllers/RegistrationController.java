@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.univent.models.Event;
@@ -50,5 +52,32 @@ public class RegistrationController {
 
 		}
 	}
+	
+	//GET ALL Registrations Method
+	//http://localhost:8080/api/registration/getAllRegistrations
+	@CrossOrigin(origins = "http://localhost:8081")
+	@GetMapping("/getAllRegistrations")
+	public ResponseEntity<Object> getAllRegistrations(){
+		try {
+			return new ResponseEntity<Object>(registrationRepository.findAll(),HttpStatus.OK);
+		}catch(Exception ex){
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(ex);
+
+		}
+	}
+
+//	//GET  Registration Method
+//	//http://localhost:8080/api/registration/getRegistration
+//	@CrossOrigin(origins = "http://localhost:8081")
+//	@GetMapping("/getRegistration")
+//	public ResponseEntity<Object> getRegistration(@RequestParam(name="eventId") String eventId){
+//		try {
+//			Option
+//			return new ResponseEntity<Object>(registrationRepository.findAll(),HttpStatus.OK);
+//		}catch(Exception ex){
+//			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(ex);
+//
+//		}
+//	}
 
 }

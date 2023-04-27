@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
@@ -82,6 +83,7 @@ public class Union {
 	@Column(name="Union_Image" , nullable = true)
 	private String unionImage;
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.EAGER,
 	cascade =  CascadeType.ALL,
 	mappedBy = "union")
