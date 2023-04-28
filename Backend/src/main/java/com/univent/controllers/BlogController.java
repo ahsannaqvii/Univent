@@ -39,6 +39,7 @@ public class BlogController {
 				return new ResponseEntity<Object>(blogRepository.save(
 						new Blog(
 								UUID.randomUUID(),
+								blogViewModel.getCategory(),
 								blogViewModel.getAuthor(),
 								blogViewModel.getTitle(),
 								blogViewModel.getContent(),

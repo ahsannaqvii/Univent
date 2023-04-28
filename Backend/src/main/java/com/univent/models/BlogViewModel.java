@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BlogViewModel {
+	private String category;
 	private String author;
 	private String title;
 	private String content;	

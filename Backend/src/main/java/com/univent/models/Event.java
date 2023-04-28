@@ -78,8 +78,5 @@ public class Event {
 	@JsonIgnoreProperties("event")
 	private List<Registration> registration = new ArrayList<>();
 
-	public Date getEventd() {
-		return eventDate;
-	}
 	
 }

@@ -25,13 +25,14 @@ public class Blog {
 	@Column(name="Blog_id" , nullable=false)
 	private UUID id;
 
+	@Column(name="Category" , nullable=false)
+	private String category;
 	
 	@Column(name="Author" , nullable=false)
 	private String author;
 	
 	@Column(name="Title" , nullable=false)
 	private String title;
-	
 	
 	@Column(name="Content" , length = 10000, nullable=false)
 	private String content;
