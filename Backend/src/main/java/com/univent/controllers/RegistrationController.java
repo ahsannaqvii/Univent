@@ -1,6 +1,9 @@
 package com.univent.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.univent.models.Event;
 import com.univent.models.Registration;
+import com.univent.models.RegistrationResponse;
 import com.univent.models.RegistrationViewModel;
 import com.univent.models.Student;
 import com.univent.repositories.EventRepository;
@@ -59,25 +63,36 @@ public class RegistrationController {
 	@GetMapping("/getAllRegistrations")
 	public ResponseEntity<Object> getAllRegistrations(){
 		try {
-			return new ResponseEntity<Object>(registrationRepository.findAll(),HttpStatus.OK);
+			List<Registration> reg = registrationRepository.findAll();
+			List<RegistrationResponse> res = new ArrayList<RegistrationResponse>();
+			for(Registration temp1: reg) {
+				RegistrationResponse temp2= new RegistrationResponse(temp1.getRegId(), temp1.getStudent().getId() , temp1.getStudent().getName() , temp1.getEvent().getId());
+				res.add(temp2);
+			}
+			return new ResponseEntity<Object>(res,HttpStatus.OK);
 		}catch(Exception ex){
 			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(ex);
 
 		}
 	}
 
-//	//GET  Registration Method
-//	//http://localhost:8080/api/registration/getRegistration
-//	@CrossOrigin(origins = "http://localhost:8081")
-//	@GetMapping("/getRegistration")
-//	public ResponseEntity<Object> getRegistration(@RequestParam(name="eventId") String eventId){
-//		try {
-//			Option
-//			return new ResponseEntity<Object>(registrationRepository.findAll(),HttpStatus.OK);
-//		}catch(Exception ex){
-//			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(ex);
-//
-//		}
-//	}
+	//GET  Registration Method
+	//http://localhost:8080/api/registration/getRegistration?eventId=58ab7ee3-8b25-46ac-9d66-3a67011bfa95
+	@CrossOrigin(origins = "http://localhost:8081")
+	@GetMapping("/getRegistration")
+	public ResponseEntity<Object> getRegistration(@RequestParam(name="eventId") UUID eventId){
+		try {
+			List<Registration> reg = registrationRepository.findByEventId(eventId);
+			List<RegistrationResponse> res = new ArrayList<RegistrationResponse>();
+			for(Registration temp1: reg) {
+				RegistrationResponse temp2= new RegistrationResponse(temp1.getRegId(), temp1.getStudent().getId() , temp1.getStudent().getName() , temp1.getEvent().getId());
+				res.add(temp2);
+			}
+			return new ResponseEntity<Object>(res,HttpStatus.OK);
+		}catch(Exception ex){
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(ex);
+
+		}
+	}
 
 }
