@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.univent.models.Blog;
@@ -69,7 +70,20 @@ public class BlogController {
     }
     
     
-	
+    //Get BLOG Profile
+    //http://localhost:8080/api/blog/getBlog?id=
+    @CrossOrigin(origins = "http://localhost:8081")
+	@GetMapping("/getBlog")
+    public ResponseEntity<Object> getBlog(@RequestParam(name="id") UUID id){
+    	Optional<Blog> blog = blogRepository.findById(id);
+    	try {
+    	return new ResponseEntity<Object>(blog.get(), HttpStatus.OK);
+    	}
+    	catch(Exception ex) {
+    		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex);
+    	}
+    }
+
 
 
 	
