@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,15 +29,15 @@ public class Registration {
 	@Column(name="Registration_Id" , nullable=false)
 	private UUID regId;
 
-
+	
+	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name = "Student", nullable = false)
-
 	private Student student;
-	
+
+	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name = "Event", nullable = false)
-
 	private Event event;
 	
 }

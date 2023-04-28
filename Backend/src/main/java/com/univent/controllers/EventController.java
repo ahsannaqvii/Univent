@@ -1,5 +1,8 @@
 package com.univent.controllers;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.univent.models.Event;
+import com.univent.models.EventResponse;
 import com.univent.models.EventViewModel;
 import com.univent.models.Union;
 import com.univent.repositories.EventRepository;
@@ -73,7 +77,26 @@ public class EventController {
 	@GetMapping("/getAllEvents")
     public ResponseEntity<Object> getAllEvents(){
     	try {
-    	return new ResponseEntity<Object>(eventRepository.findAll(), HttpStatus.OK);
+    	List<Event> event = eventRepository.findAll();
+    	EventResponse res = new EventResponse();
+
+    	Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+    	String formattedDate = formatter.format(date);
+    	Date parsedDate = formatter.parse(formattedDate);
+    	
+    	for(Event temp: event) {
+    		Date tempDate = formatter.parse(temp.getEventDate().toString());
+        	
+        	if (parsedDate.compareTo(tempDate)>0) {
+        		res.addPast(temp);
+
+            } else {
+            	res.addFuture(temp);
+            }
+        	
+    	}
+    	return new ResponseEntity<Object>(res, HttpStatus.OK);
     	}
     	catch(Exception ex) {
     		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex);

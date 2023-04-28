@@ -66,18 +66,20 @@ public class Event {
 	@Column(name="Event_Image" , nullable = true)
 	private String eventImage;
 	
-
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "Union_name", nullable = false)
     private Union union;
 	
-	//@JsonIgnore
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,
 			cascade =  CascadeType.ALL,
 			mappedBy = "event")
 	@JsonIgnoreProperties("event")
 	private List<Registration> registration = new ArrayList<>();
 
-	
+	public Date getEventd() {
+		return eventDate;
+	}
 	
 }
