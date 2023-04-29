@@ -71,7 +71,6 @@ export default {
   }),
   methods: {
     login() {
-      console.log(this.$store);
       this.$store
         .dispatch("Login", {
           email: this.email,

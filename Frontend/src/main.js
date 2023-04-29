@@ -37,6 +37,8 @@ const router = new VueRouter({
   routes:Routes,
 })
 
+// router.beforeEach((to, from, next) => {
+// }   )
 new Vue({
   vuetify,
   router : router,

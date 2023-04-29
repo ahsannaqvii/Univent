@@ -4,23 +4,29 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12 col-12 text-center">
-          <h2 class="mb-lg-5 mb-4">About Tiya</h2>
+          <h2 class="mb-lg-5 mb-4">
+            About South China University of Technology
+          </h2>
         </div>
 
         <div class="col-lg-5 col-12 me-auto mb-4 mb-lg-0">
-          <h3 class="mb-3">Tiya Club History</h3>
+          <h3 class="mb-3">SCUT History</h3>
 
           <p>
-            <strong>Since 1984</strong>, Tiya is ranked #8 in the top 10 golf
-            courses in the world. Tiya is Bootstrap 5 HTML CSS template for golf
-            clubs. Anyone can modify and use this layout for commercial
-            purposes.
+            <strong>Since 1984</strong>, The South China University of
+            Technology (SCUT) is a leading educational institution in China. It
+            is a public research-intensive university directly governed by the
+            Chinese Ministry of Education. Located in the city of Guangzhou, a
+            thriving metropolis in South China, the university today covers a
+            total area of 391 hectares, consisting of three campuses: the Wushan
+            Campus, the University Town Campus, and the Guangzhou International
+            Campus.
           </p>
 
           <p>
-            Tiya Golf Club is 100% free CSS template provided by TemplateMo
-            website. Please tell your friends about our website. Thank you for
-            visiting.
+            In 1995, SCUT was listed in China's "Project 211", a national
+            endeavor aiming at strengthening top institutions of higher learning
+            as a priority for the 21st century. 
           </p>
         </div>
 
@@ -28,7 +34,7 @@
           <div class="member-block">
             <div class="member-block-image-wrap">
               <img
-                src="./../../assets/about/img1.jpg"
+                src="./../../../assets/about/img1.jpg"
                 class="member-block-image img-fluid"
                 alt=""
               />
@@ -56,7 +62,7 @@
           <div class="member-block">
             <div class="member-block-image-wrap">
               <img
-                src="./../../assets/about/img2.jpg"
+                src="./../../../assets/about/img2.jpg"
                 class="member-block-image img-fluid"
                 alt=""
               />
@@ -91,8 +97,6 @@ export default {
 </script>
 
 <style scoped>
-
-
 body {
   background-color: #ffffff;
   font-family: "DM Sans", sans-serif;

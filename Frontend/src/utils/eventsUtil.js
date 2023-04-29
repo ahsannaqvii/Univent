@@ -18,11 +18,10 @@ export const UniqueEventType = (data) => {
   return uniqueEventTypes;
 };
 
-export const extractDate = (data) => {
-  data.forEach((element) => {
-    element.eventDate = moment(element.eventDate).utc().format("YYYY-MM-DD");
-  });
-  return data;
+export const extractDate = (date) => {
+  date = moment(date).utc().format("YYYY-MM-DD");
+
+  return date;
 };
 
 export function getMonthName(monthNumber) {

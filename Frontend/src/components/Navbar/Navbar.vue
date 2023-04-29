@@ -2,24 +2,23 @@
   <header>
     <div class="university_icon">
       <h2 style="color: white">
-        <router-link
-          to="/"
-          style="text-transform: uppercase"
+        <router-link to="/" style="text-transform: uppercase"
           >South China University of Technology</router-link
         >
       </h2>
     </div>
     <nav>
       <ul class="nav__links">
-        <li><router-link to="">UNION</router-link></li>
+        <li><router-link to="/Union">UNION</router-link></li>
         <li><router-link to="/Event">EVENTS</router-link></li>
 
         <li><router-link to="/UserProfile">USER PROFILE</router-link></li>
+        <li><router-link to="/Blogs">BLOGS</router-link></li>
+        <li><router-link to="/EventAttendance">ATTENDANCE</router-link></li>
       </ul>
     </nav>
     <router-link to="/Login" class="signoutbtn">SIGN OUT</router-link>
   </header>
-  
 </template>
   
   <script>
@@ -34,7 +33,6 @@ export default {
   font-weight: bold;
 }
 
-
 header {
   box-sizing: border-box;
   margin: 0;
@@ -43,7 +41,6 @@ header {
   height: 60px;
   justify-content: space-between;
   align-items: center;
-
 }
 
 li,

@@ -106,7 +106,6 @@
                         class="btn -secondary"
                         tabindex="0"
                       >
-                        <!-- src="./../../../assets/pastevents/ico-bookmark.svg" -->
 
                         <img class="ico svg" alt="" />
                         Read More
@@ -354,7 +353,6 @@ p {
   text-align: left;
 }
 
-/* //CSS  */
 .section-portfolio {
   position: relative;
 }

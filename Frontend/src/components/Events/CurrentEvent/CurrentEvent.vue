@@ -7,6 +7,13 @@
             <h2>Upcoming Events</h2>
 
             <div class="text-center">
+              <v-btn dark v-bind="attrs" v-on="on" style="margin-right: 20px">
+                Add Event
+                <font-awesome-icon
+                  style="margin-left: 20px"
+                  :icon="['fas', 'circle-plus']"
+                />
+              </v-btn>
               <v-menu offset-y>
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn dark v-bind="attrs" v-on="on">
@@ -53,7 +60,7 @@
               <div class="custom-block-image-wrap">
                 <a href="event-detail.html">
                   <img
-                    src="./../../../assets/current-events/professional-golf-player.jpg"
+                    :src="currentEventInfo.eventImage"
                     class="custom-block-image img-fluid"
                     alt=""
                   />
@@ -73,7 +80,7 @@
                 </p>
 
                 <p class="mb-0">
-                  {{ currentEventInfo.desc }}
+                  {{ currentEventInfo.description }}
                 </p>
 
                 <div class="d-flex flex-wrap border-top mt-4 pt-3">

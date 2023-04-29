@@ -6,7 +6,7 @@
           <div class="row">
             <div class="col-sm-12 col-md-7 col-lg-6">
               <h6>&lt; software engineering done right /&gt;</h6>
-              <h1>By Practitioners, For Practitioners</h1>
+              <h1>By Students, For Students</h1>
               <p>
                 O&amp;B's Java and Agile training courses were developed using
                 knowledge gained from real-world software development projects.
@@ -27,13 +27,13 @@
                   >Agile</a
                 >, and other related technologies.
               </p>
-              <a href="/training/tracks" class="btn -secondary mt10">
+              <a href="/Event" class="btn -secondary mt10">
                 <img
                   src="./../../../assets/ico-arrow.svg"
                   alt=""
                   class="ico svg"
                 />
-                Browse Training Tracks &amp; Courses
+                Browse Events  &amp; Unions
               </a>
             </div>
           </div>
@@ -59,8 +59,8 @@
 import { mapGetters } from "vuex";
 
 import Pastevents from "../PastEvents/Pastevents.vue";
-import About from "@/components/AboutEvent/AboutEvent.vue";
-import CurrentEvent from "../CurrentEvents/CurrentEvent.vue";
+import About from "../AboutEvent/AboutEvent.vue";
+import CurrentEvent from "../CurrentEvent/CurrentEvent.vue";
 export default {
   name: "event-page",
   components: {

@@ -75,12 +75,6 @@
         </label>
       </div>
       <div class="form-field">
-        <!-- <input
-          type="submit"
-          value="Register"
-          class="register"
-          name="register"
-        /> -->
         <button class="register" @click.prevent="RegisterEvent">
           Register
         </button>
@@ -89,34 +83,15 @@
   </div>
 </template>
 
-
 <script>
 export default {
-  name: "event-registration",
-
-  data: () => ({
-    id: null,
-    studentID: null,
-  }),
-  created() {
-    this.id = this.$route.params.eventId;
-    console.log(this.id);
-  },
-  methods: {
-    RegisterEvent() {
-      console.log(this.id, this.studentID);
-      this.$store.dispatch("EventRegistration", {
-        studentId: this.studentID,
-        eventId: this.id,
-      });
-    },
-  },
+  name: "AddEvent",
 };
 </script>
 
+
 <style scoped>
 .wrapper {
-  
   max-width: 1200px;
   background-color: #fff;
   border-radius: 10px;
@@ -316,5 +291,3 @@ export default {
   color: #001233;
 }
 </style>
-
-

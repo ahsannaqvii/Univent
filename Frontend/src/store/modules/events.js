@@ -48,12 +48,15 @@ export default {
     async EventData({ commit }) {
       const response = await axios.get(baseURL + "event/getAllEvents");
       let updatedData = clearData(response.data);
-      updatedData = extractDate(updatedData);
+      // console.log(updatedData);
+      updatedData.forEach((element) => {
+        element.eventDate = extractDate(element.eventDate);
+      });
+      // updatedData = extractDate(updatedData);
       commit("EVENT_DATA", updatedData);
     },
 
     async EventRegistration({ commit }, payload) {
-      console.log(payload);
       const response = await axios.post(
         baseURL + "registration/addRegistration",
         payload
