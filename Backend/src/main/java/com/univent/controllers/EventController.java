@@ -77,6 +77,19 @@ public class EventController {
 	@GetMapping("/getAllEvents")
     public ResponseEntity<Object> getAllEvents(){
     	try {
+    	return new ResponseEntity<Object>(eventRepository.findAll(), HttpStatus.OK);
+    	}
+    	catch(Exception ex) {
+    		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex);
+    	}
+    }
+    
+    //Get Future / Past EVENTS
+    //http://localhost:8080/api/event/getFpEvents
+    @CrossOrigin(origins = "http://localhost:8081")
+	@GetMapping("/getFpEvents")
+    public ResponseEntity<Object> getFpEvents(){
+    	try {
     	List<Event> event = eventRepository.findAll();
     	EventResponse res = new EventResponse();
 
@@ -102,7 +115,6 @@ public class EventController {
     		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex);
     	}
     }
-    
     
 	//Get Event Profile
     //http://localhost:8080/api/event/getEvent?name=ACM
