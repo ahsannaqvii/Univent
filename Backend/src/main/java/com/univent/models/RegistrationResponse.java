@@ -14,5 +14,6 @@ public class RegistrationResponse {
 	private String studentId;
 	private String name;
 	private UUID eventId;
+	private String eventName;
 	
 }

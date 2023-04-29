@@ -66,7 +66,7 @@ public class RegistrationController {
 			List<Registration> reg = registrationRepository.findAll();
 			List<RegistrationResponse> res = new ArrayList<RegistrationResponse>();
 			for(Registration temp1: reg) {
-				RegistrationResponse temp2= new RegistrationResponse(temp1.getRegId(), temp1.getStudent().getId() , temp1.getStudent().getName() , temp1.getEvent().getId());
+				RegistrationResponse temp2= new RegistrationResponse(temp1.getRegId(), temp1.getStudent().getId() , temp1.getStudent().getName() , temp1.getEvent().getId() , temp1.getEvent().getName());
 				res.add(temp2);
 			}
 			return new ResponseEntity<Object>(res,HttpStatus.OK);
@@ -85,7 +85,7 @@ public class RegistrationController {
 			List<Registration> reg = registrationRepository.findByEventId(eventId);
 			List<RegistrationResponse> res = new ArrayList<RegistrationResponse>();
 			for(Registration temp1: reg) {
-				RegistrationResponse temp2= new RegistrationResponse(temp1.getRegId(), temp1.getStudent().getId() , temp1.getStudent().getName() , temp1.getEvent().getId());
+				RegistrationResponse temp2= new RegistrationResponse(temp1.getRegId(), temp1.getStudent().getId() , temp1.getStudent().getName() , temp1.getEvent().getId() , temp1.getEvent().getName());
 				res.add(temp2);
 			}
 			return new ResponseEntity<Object>(res,HttpStatus.OK);
