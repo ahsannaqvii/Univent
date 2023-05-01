@@ -1,6 +1,7 @@
 package com.univent.controllers;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -19,8 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.univent.models.Event;
 import com.univent.models.EventResponse;
 import com.univent.models.EventViewModel;
+import com.univent.models.Registration;
 import com.univent.models.Union;
 import com.univent.repositories.EventRepository;
+import com.univent.repositories.RegistrationRepository;
 import com.univent.repositories.UnionRepository;
 
 @RestController
@@ -30,6 +33,8 @@ public class EventController {
 	EventRepository eventRepository;
 	@Autowired
 	UnionRepository unionRepository;
+	@Autowired
+	RegistrationRepository registrationRepository;
 	
 	
 	
@@ -83,16 +88,15 @@ public class EventController {
     		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex);
     	}
     }
-    
-    //Get Future / Past EVENTS
-    //http://localhost:8080/api/event/getFpEvents
+
+    //Get Past EVENTS
+    //http://localhost:8080/api/event/getPastEvents
     @CrossOrigin(origins = "http://localhost:8081")
-	@GetMapping("/getFpEvents")
-    public ResponseEntity<Object> getFpEvents(){
+	@GetMapping("/getPastEvents")
+    public ResponseEntity<Object> getPastEvents(){
     	try {
     	List<Event> event = eventRepository.findAll();
-    	EventResponse res = new EventResponse();
-
+    	List<EventResponse> pastEvent = new ArrayList<EventResponse>();
     	Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
     	String formattedDate = formatter.format(date);
@@ -102,19 +106,31 @@ public class EventController {
     		Date tempDate = formatter.parse(temp.getEventDate().toString());
         	
         	if (parsedDate.compareTo(tempDate)>0) {
-        		res.addPast(temp);
-
-            } else {
-            	res.addFuture(temp);
-            }
-        	
+            	boolean flag = false;
+        		List<Registration> registration = registrationRepository.findByEventId(temp.getId());
+        		if(registration!=null) {
+        		for(Registration reg: registration) {
+        			if(reg.getAttendance()==null) {
+                		flag = true;
+        			}		
+        		}
+        		if(flag==true) {
+        			pastEvent.add(
+        					new EventResponse(temp.getId(),
+        							temp.getName()));
+             	 }
+        	  }        		
+            }        	
     	}
-    	return new ResponseEntity<Object>(res, HttpStatus.OK);
+    	return new ResponseEntity<Object>(pastEvent, HttpStatus.OK);
     	}
     	catch(Exception ex) {
     		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex);
     	}
     }
+
+    
+
     
 	//Get Event Profile
     //http://localhost:8080/api/event/getEvent?name=ACM
@@ -130,6 +146,37 @@ public class EventController {
     	}
     }
 
+    //Get Future / Past EVENTS
+//  //http://localhost:8080/api/event/getFpEvents
+//  @CrossOrigin(origins = "http://localhost:8081")
+//	@GetMapping("/getFpEvents")
+//  public ResponseEntity<Object> getFpEvents(){
+//  	try {
+//  	List<Event> event = eventRepository.findAll();
+//  	EventResponse res = new EventResponse();
+//
+//  	Date date = new Date();
+//      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+//  	String formattedDate = formatter.format(date);
+//  	Date parsedDate = formatter.parse(formattedDate);
+//  	
+//  	for(Event temp: event) {
+//  		Date tempDate = formatter.parse(temp.getEventDate().toString());
+//      	
+//      	if (parsedDate.compareTo(tempDate)>0) {
+//      		res.addPast(temp);
+//
+//          } else {
+//          	res.addFuture(temp);
+//          }
+//      	
+//  	}
+//  	return new ResponseEntity<Object>(res, HttpStatus.OK);
+//  	}
+//  	catch(Exception ex) {
+//  		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex);
+//  	}
+//  }
 
 	
 }

@@ -1,5 +1,6 @@
 package com.univent.models;
 
+import java.util.Date;
 import java.util.UUID;
 
 import lombok.AllArgsConstructor;
@@ -15,5 +16,6 @@ public class RegistrationResponse {
 	private String name;
 	private UUID eventId;
 	private String eventName;
+	private Date eventDate;
 	
 }
