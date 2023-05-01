@@ -40,4 +40,8 @@ public class Registration {
     @JoinColumn(name = "Event", nullable = false)
 	private Event event;
 	
+	@Column(name="Attendance" , nullable=true)
+	private String attendance;
+
+	
 }
