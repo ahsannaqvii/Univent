@@ -101,14 +101,16 @@ public class RegistrationController {
 	//http://localhost:8080/api/registration/addAttendance
 	@CrossOrigin(origins = "http://localhost:8081")
 	@PostMapping("/addAttendance")
-	public ResponseEntity<Object> addAttendance(@RequestBody AttendanceViewModel attendanceViewModel){
+	public ResponseEntity<Object> addAttendance(@RequestBody List<AttendanceViewModel> attendanceViewModel){
 		
 		try {
-				Optional<Registration> registration = registrationRepository.findById(attendanceViewModel.getRegId());
+				for(AttendanceViewModel temp: attendanceViewModel) {
+				Optional<Registration> registration = registrationRepository.findById(temp.getRegId());
 				if(registration!=null) {
-					registration.get().setAttendance(attendanceViewModel.getAttendance().toUpperCase());
+					registration.get().setAttendance(temp.getAttendance().toUpperCase());
 					registrationRepository.save(registration.get());
 				}
+			}
 				return ResponseEntity.status(HttpStatus.OK).body(null);
 		}catch(Exception ex){
 			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(ex);
