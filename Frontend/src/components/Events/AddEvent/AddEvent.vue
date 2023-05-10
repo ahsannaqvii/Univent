@@ -19,53 +19,124 @@
     <form class="form-right">
       <h2>Registration form</h2>
       <div class="row">
-        <div class="col-sm-6 mb-3">
-          <label>First Name</label>
+        <div class="col-sm-4 mb-3">
+          <label>Event Name</label>
 
           <v-text-field
             class="text-field"
             type="text"
-            name="first_name"
-            placeholder="Enter your first name"
+            name="name"
+            placeholder="Enter your event name"
+            outlined
+            v-model="name"
+          />
+        </div>
+        <div class="col-sm-4 mb-3">
+          <label>Event Type</label>
+
+          <v-text-field
+            class="text-field"
+            type="text"
+            name="eventType"
+            placeholder="Enter your event Type "
+            outlined
+            v-model="eventType"
+          />
+        </div>
+        <div class="col-sm-4 mb-3">
+          <label>Guest Name</label>
+
+          <v-text-field
+            class="text-field"
+            type="text"
+            name="guestName"
+            placeholder="Enter the guest name"
+            outlined
+            v-model="guestName"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4 mb-3">
+          <label>Event Image</label>
+          <v-text-field
+            class="text-field"
+            type="text"
+            name="eventImage"
+            placeholder="Enter the event image"
+            v-model="eventImage"
             outlined
           />
         </div>
-        <div class="col-sm-6 mb-3">
-          <label>Last Name</label>
-
+        <div class="col-sm-4 mb-3">
+          <label>Union Name</label>
           <v-text-field
             class="text-field"
             type="text"
-            name="last_name"
-            placeholder="Enter your last name"
+            v-model="unionName"
+            name="UnionName`"
+            placeholder="Enter the union name"
+            outlined
+          />
+        </div>
+        <div class="col-sm-4 mb-3">
+          <label>Event Date</label>
+          <v-text-field
+            class="text-field"
+            type="date"
+            v-model="eventDate"
+            name="eventDate"
+            placeholder="Enter the event date"
             outlined
           />
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-6 mb-3">
-          <label>Event ID</label>
+        <div class="col-sm-4 mb-3">
+          <label>Event Time</label>
           <v-text-field
             class="text-field"
-            type="text"
-            name="email"
-            placeholder="Enter the event ID"
-            v-model.trim="id"
-            readonly
+            type="time"
+            name="eventTime"
+            placeholder="Enter the event time"
+            v-model="eventTime"
             outlined
           />
         </div>
-        <div class="col-sm-6 mb-3">
-          <label>Student ID</label>
+        <div class="col-sm-4 mb-3">
+          <label>Venue</label>
           <v-text-field
             class="text-field"
             type="text"
-            v-model="studentID"
+            v-model="venue"
             name="studentID"
             placeholder="Enter your student ID"
             outlined
           />
         </div>
+        <div class="col-sm-4 mb-3">
+          <label>Registration Deadline</label>
+          <v-text-field
+            class="text-field"
+            type="date"
+            v-model="regDeadline"
+            name="regDeadline"
+            placeholder="Enter your reg deadline"
+            outlined
+          />
+        </div>
+      </div>
+      <div class="row">
+        <label>Event Description</label>
+
+        <textarea
+          name=""
+          id=""
+          cols="20"
+          rows="5"
+          class="text-area"
+          v-model="description"
+        ></textarea>
       </div>
       <div class="mb-3">
         <label class="option">
@@ -75,9 +146,7 @@
         </label>
       </div>
       <div class="form-field">
-        <button class="register" @click.prevent="RegisterEvent">
-          Register
-        </button>
+        <button class="register" @click.prevent="AddEvent">Add Event</button>
       </div>
     </form>
   </div>
@@ -86,13 +155,47 @@
 <script>
 export default {
   name: "AddEvent",
+  data: () => ({
+    description: "",
+    name: "",
+    eventType: "",
+    eventImage: "",
+    guestName: "",
+    eventDate: "",
+    eventTime: "",
+    venue: "",
+    regDeadline: "",
+    meetLink: "",
+    unionName: "",
+  }),
+  methods: {
+    AddEvent() {
+      this.$store.dispatch("AddEvent", {
+        name: this.name,
+        description: this.description,
+        eventType: this.eventType,
+        guestName: this.guestName,
+        venue: this.venue,
+        meetLink: this.meetLink,
+        regDeadline: this.regDeadline,
+        eventDate: this.eventDate,
+        eventTime: this.eventTime + ":00",
+        eventImage: this.eventImage,
+        unionName: this.unionName,
+      });
+    },
+  },
 };
 </script>
 
 
 <style scoped>
+.text-area {
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
 .wrapper {
-  max-width: 1200px;
+  max-width: 1300px;
   background-color: #fff;
   border-radius: 10px;
   position: relative;
@@ -108,7 +211,7 @@ export default {
   border-bottom-left-radius: 10px;
   padding: 20px 40px;
   position: relative;
-  height: 40rem;
+  height: 55rem;
   width: 100%;
   color: #fff;
 }

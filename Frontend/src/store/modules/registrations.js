@@ -18,17 +18,24 @@ export default {
   },
 
   getters: {
-    getRegistrationData: (state) => state.registrationData,
+    getEventRegistrationData: (state) => state.registrationData,
   },
   actions: {
-    async AllEventRegistrations({ commit }) {
-      const response = await axios.get(baseURL + "getAllRegistrations");
-      commit("EVENT_REGISTRATIONS", response.data);
+    async GetEventAttendance({ commit }, eventId) {
+      const response = await axios.get(
+        baseURL + "getAttendance?eventId=" + eventId
+      );
+      commit("EVENT_REGISTRATION", response.data);
+    },
+    // Function designed to mark attendance of specific students in an event
+    async MarkAttendance({ commit }, payload) {
+      const response = await axios.post(baseURL + "addAttendance", payload);
+      console.log(response);
     },
   },
 
   mutations: {
-    EVENT_REGISTRATIONS: function (state, payload) {
+    EVENT_REGISTRATION: function (state, payload) {
       state.registrationData = payload;
     },
   },

@@ -7,7 +7,8 @@
             <h2>Upcoming Events</h2>
 
             <div class="text-center">
-              <v-btn dark v-bind="attrs" v-on="on" style="margin-right: 20px">
+              <!-- <router-link style="margin-right: 20px; background-color:black;">Add Event </router-link> -->
+              <v-btn dark v-bind="attrs" v-on="on" style="margin-right: 20px;padding-top:10px" href="/AddEvent">
                 Add Event
                 <font-awesome-icon
                   style="margin-left: 20px"

@@ -2,7 +2,7 @@
   <v-app>
     <v-carousel :show-arrows="false" height="900px">
       <v-carousel-item
-        v-for="(item, i) in items"
+        v-for="(item, i) in imageURLs"
         :key="i"
         :src="item.src"
         reverse-transition="fade-transition"
@@ -13,45 +13,61 @@
       <h2>Student Attendance</h2>
     </div>
 
+      <v-btn class="event-selection-btn" height="4rem" >
+        <v-select
+          dark
+          class="select"
+          :items="this.GetPastEvents"
+          label="Select an Event"
+          name="PastEvent"
+          item-text="eventName"
+          return-object
+          @change="ChooseEvent($event)"
+        ></v-select>
+      </v-btn>
+
     <div class="container">
-      <table class="table table-striped">
+      <table class="table table-striped" v-if="eventChosen">
         <thead class="thead-dark">
           <tr>
             <th scope="col">Student ID</th>
             <th scope="col">Student Name</th>
             <th scope="col">Registration ID</th>
-            <th scope="col">Event ID</th>
+            <th scope="col">Event Name</th>
+            <th scope="col">Event Date</th>
             <th scope="col">Attendance</th>
           </tr>
         </thead>
+
         <tbody>
-          <!-- :class="classObject"
-                  @click="classObject()" -->
           <tr v-for="reg in Registrations">
             <th scope="row">{{ reg.studentId }}</th>
             <td>{{ reg.name }}</td>
             <td>{{ reg.regId }}</td>
             <td>{{ reg.eventName }}</td>
+            <td>{{ reg.eventDate }}</td>
 
             <td>
               <v-btn class="attendance-btn">
-                <!-- @click="markAttendance(reg.regId)" -->
-                <!-- v-model="defaultVall" -->
-
                 <v-select
-                v-model="defaultAttendanceVal"
+                  dark
                   class="select"
                   :items="attendanceValues"
-                  @change="markAttendance($event,reg.regId,reg.studentId)"
+                  @change="markAttendance($event, reg.regId)"
                 ></v-select>
               </v-btn>
             </td>
           </tr>
         </tbody>
       </table>
-      <div class="col-lg-12">
+      <div class="col-lg-12" v-if="eventChosen">
         <fieldset>
-          <button type="submit" id="form-submit" class="main-button">
+          <button
+            type="submit"
+            id="form-submit"
+            class="main-button"
+            @click="SubmitAttendance()"
+          >
             Submit
           </button>
         </fieldset>
@@ -67,9 +83,10 @@ export default {
   name: "EventAttendance",
   data: () => ({
     isActive: true,
-    defaultAttendanceVal: 'A',
-    // Images for carousel 
-    items: [
+    eventChosen: false,
+
+    // Images for carousel
+    imageURLs: [
       {
         src: "https://i.ibb.co/j6phDRw/photo-1522202176988-66273c2fd55f-crop-faces-edges-cs-tinysrgb-fit-crop-fm-jpg-ixid-Mnwx-Mj-A3f-DB8-M.jpg",
       },
@@ -82,25 +99,51 @@ export default {
       },
     ],
     attendanceValues: ["P", "A"],
+    attendanceData: [],
   }),
   methods: {
-    ...mapActions({ GetAllEventRegistrations: "AllEventRegistrations" }),
+    ...mapActions({
+      PastEvents: "PastEvents",
+    }),
+
     //Function to hit the API to mark student attendance.
-    markAttendance: function (event,id1,id2) {
-      console.log("Attendance marked", event,id1,id2);
+    markAttendance: function (attendance, regId) {
+      this.attendanceData.push({ regId, attendance });
+    },
+
+    //Function to choose event for which we want student attendance
+    ChooseEvent: function ({ eventId }) {
+      this.attendanceData = [];
+      this.eventChosen = true;
+      this.$store.dispatch("GetEventAttendance", eventId);
+    },
+    SubmitAttendance: function () {
+      this.$store.dispatch("MarkAttendance", this.attendanceData);
     },
   },
   mounted() {
-    this.GetAllEventRegistrations();
+    this.PastEvents();
   },
 
   computed: {
-    ...mapGetters({ Registrations: "getRegistrationData" }),
+    ...mapGetters({
+      Registrations: "getEventRegistrationData",
+      GetPastEvents: "GetPastEvents",
+    }),
   },
 };
 </script>
 
 <style scoped>
+.event-selection-btn {
+  display: flex;
+  margin: auto;
+  padding: 40px;
+  width: 10%;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 80px;
+}
 .custom-btn-bg {
   background-color: #192836 !important;
 }
@@ -112,10 +155,7 @@ export default {
   background-color: #192836 !important;
 }
 
-/* .theme--light.v-select .v-select__selections {
-  color: white !important;
-  min-height: 10px;
-} */
+
 
 .select {
   width: 50px;
@@ -149,6 +189,8 @@ export default {
 .section-title h2 {
   margin: 0;
   text-transform: uppercase;
+  font-size:5rem;
+  font-weight: 700;
 }
 .main-button {
   display: flex;
