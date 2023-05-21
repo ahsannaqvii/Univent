@@ -48,11 +48,13 @@ public class Blog {
 	@Column(name="Date" , nullable=false)
 	private Date date;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,
 			cascade =  CascadeType.ALL,
 			mappedBy = "id")
-	@JsonIgnoreProperties("id")
+//	@JsonIgnoreProperties("id")
 	private List<BlogComments> blogComments = new ArrayList<>();
+	
+//	private List<BlogComments> blogComments1 = new ArrayList<>();
 
 }
