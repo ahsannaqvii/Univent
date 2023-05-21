@@ -1,5 +1,6 @@
 package com.univent.controllers;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -51,6 +52,7 @@ public class BlogController {
 								blogViewModel.getContent(),
 								blogViewModel.getDate(),
 								null
+//								null
 								)),
 						HttpStatus.CREATED);
 			
@@ -69,7 +71,11 @@ public class BlogController {
 	@GetMapping("/getAllBlogs")
     public ResponseEntity<Object> getAllBlogs(){
     	try {
-    	return new ResponseEntity<Object>(blogRepository.findAll(), HttpStatus.OK);
+    		List<Blog> blog = blogRepository.findAll();
+    		for(Blog temp : blog) {
+    			temp.setBlogComments(blogCommentsRepository.findByBlogId(temp.getId()));
+    		}
+    	return new ResponseEntity<Object>(blog, HttpStatus.OK);
     	}
     	catch(Exception ex) {
     		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex);
@@ -84,6 +90,7 @@ public class BlogController {
     public ResponseEntity<Object> getBlog(@RequestParam(name="id") UUID id){
     	Optional<Blog> blog = blogRepository.findById(id);
     	try {
+    		blog.get().setBlogComments(blogCommentsRepository.findByBlogId(id));
     	return new ResponseEntity<Object>(blog.get(), HttpStatus.OK);
     	}
     	catch(Exception ex) {
