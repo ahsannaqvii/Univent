@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.univent.models.AttendanceViewModel;
 import com.univent.models.Event;
+import com.univent.models.GetRegistrationByIdResponse;
 import com.univent.models.Registration;
 import com.univent.models.RegistrationResponse;
 import com.univent.models.RegistrationViewModel;
@@ -136,6 +137,32 @@ public class RegistrationController {
 		}catch(Exception ex){
 			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(ex);
 
+		}
+	}
+	
+	//GET Events Registered By StudentID
+	//http://localhost:8080/api/registration/getEventsByStudentId?id=19k-1475
+	@CrossOrigin(origins="http://localhost:8081")
+	@GetMapping("/getEventsByStudentId")
+	public ResponseEntity<Object> getEventsByStudentId(@RequestParam(name="id") String id){
+		try {
+			List<GetRegistrationByIdResponse> response = new ArrayList<GetRegistrationByIdResponse>();
+				var registrations = registrationRepository.findByStudentId(id);
+				if (registrations!=null) {
+				for (Registration temp: registrations) {
+					response.add(new GetRegistrationByIdResponse(
+							temp.getRegId(),
+							temp.getEvent().getId(),
+							temp.getEvent().getName()
+							));
+				}
+				return new ResponseEntity<Object>(response , HttpStatus.OK);
+				}
+				else
+					return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+		}catch(Exception ex) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex);
+			
 		}
 	}
 

@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.univent.models.Blog;
+import com.univent.models.BlogCommentViewModel;
+import com.univent.models.BlogComments;
 import com.univent.models.BlogViewModel;
+import com.univent.repositories.BlogCommentsRepository;
 import com.univent.repositories.BlogRepository;
 
 @RestController
@@ -23,6 +26,8 @@ import com.univent.repositories.BlogRepository;
 public class BlogController {
 	@Autowired
 	BlogRepository blogRepository;
+	@Autowired
+	BlogCommentsRepository blogCommentsRepository;
 	
 	
 	
@@ -44,7 +49,9 @@ public class BlogController {
 								blogViewModel.getAuthor(),
 								blogViewModel.getTitle(),
 								blogViewModel.getContent(),
-								blogViewModel.getDate())),
+								blogViewModel.getDate(),
+								null
+								)),
 						HttpStatus.CREATED);
 			
 				
@@ -78,6 +85,40 @@ public class BlogController {
     	Optional<Blog> blog = blogRepository.findById(id);
     	try {
     	return new ResponseEntity<Object>(blog.get(), HttpStatus.OK);
+    	}
+    	catch(Exception ex) {
+    		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex);
+    	}
+    }
+
+    //Post Comment
+    //http://localhost:8080/api/blog/postComment
+    @CrossOrigin(origins = "http://localhost:8081")
+    @PostMapping("/postComment")
+    public ResponseEntity<Object> postComment(@RequestBody BlogCommentViewModel blogComment){
+    	try {
+    		Optional<Blog> blog = blogRepository.findById(blogComment.getBlogId());
+    		return new ResponseEntity<Object>(blogCommentsRepository.save(
+    				new BlogComments(
+    						null,
+    						blogComment.getName(),
+    						blogComment.getComment(),
+    						blog.get()
+    						)),
+    				HttpStatus.OK
+    				);
+    	}catch(Exception ex) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex);
+    }
+    }
+    
+    //Get Comment by Blog Id
+    //http://localhost:8080/api/blog/getCommentByBlogId?id=
+    @CrossOrigin(origins = "http://localhost:8081")
+    @GetMapping("/getCommentByBlogId")
+    public ResponseEntity<Object> postComment(@RequestParam(name="id") UUID id){
+    	try {
+    		return new ResponseEntity<Object>(blogCommentsRepository.findByBlogId(id),HttpStatus.OK);
     	}
     	catch(Exception ex) {
     		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex);
