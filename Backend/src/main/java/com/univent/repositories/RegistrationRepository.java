@@ -12,6 +12,8 @@ import com.univent.models.Registration;
 public interface RegistrationRepository extends JpaRepository<Registration , UUID> {
 	List<Registration> findByEventId(UUID eventId);
 	List<Registration> findByEventName(String eventName);
+	List<Registration> findByStudentId(String id);
+
 
 }
 
