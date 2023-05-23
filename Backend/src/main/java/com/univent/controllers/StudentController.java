@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.univent.models.Address;
 import com.univent.models.AddressViewModel;
+import com.univent.models.EditProfileViewModel;
 import com.univent.models.LoginViewModel;
 import com.univent.models.Student;
 import com.univent.repositories.AddressRepository;
@@ -183,6 +184,24 @@ public class StudentController {
   			return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
     	}
   	}
-
+	 // Edit User Profile
+	 // http://localhost:8080/api/student/editUserProfile
+	 @CrossOrigin(origins = "http://localhost:8081")
+	 @PostMapping("/editUserProfile")
+	 public ResponseEntity<Object> editUserProfile(@RequestBody EditProfileViewModel editProfileViewModel) {
+	     Optional<Student> student = studentRepository.findById(editProfileViewModel.getId());
+	     if (student.isPresent()) {
+	         Student existingStudent = student.get();
+	         existingStudent.setEmail(editProfileViewModel.getEmail());
+	         existingStudent.setPassword(editProfileViewModel.getPassword());
+	         existingStudent.setPhone(editProfileViewModel.getPhone());
+	         existingStudent.getAddress().setStreet(editProfileViewModel.getStreet());
+	         existingStudent.getAddress().setCity(editProfileViewModel.getCity());
+	         existingStudent.getAddress().setCountry(editProfileViewModel.getCountry());
+	         return new ResponseEntity<>(studentRepository.save(existingStudent), HttpStatus.CREATED);
+	     } else {
+	         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	     }
+	 }
       
 }
