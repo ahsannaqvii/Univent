@@ -8,7 +8,13 @@
 
             <div class="text-center">
               <!-- <router-link style="margin-right: 20px; background-color:black;">Add Event </router-link> -->
-              <v-btn dark v-bind="attrs" v-on="on" style="margin-right: 20px;padding-top:10px" href="/AddEvent">
+              <v-btn
+                dark
+                v-bind="attrs"
+                v-on="on"
+                style="margin-right: 20px; padding-top: 10px"
+                href="/AddEvent"
+              >
                 Add Event
                 <font-awesome-icon
                   style="margin-left: 20px"
@@ -215,7 +221,7 @@ h6 {
 
 p {
   color: #717275;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 300;
 }
 
@@ -303,7 +309,7 @@ strong {
 
 .events-title {
   font-size: 28px;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 /*---------------------------------------

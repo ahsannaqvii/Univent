@@ -92,12 +92,12 @@ export default {
     };
   },
   mounted() {
-    this.phone = this.$store.state.userPhone;
-    this.password = this.$store.state.userPassword;
-    this.email = this.$store.state.userEmail;
-    this.street = this.$store.state.userAddress.userStreet;
-    this.city = this.$store.state.userAddress.userCity;
-    this.country = this.$store.state.userAddress.userCountry;
+    this.phone = this.$store.state.user.userPhone;
+    this.password = this.$store.state.user.userPassword;
+    this.email = this.$store.state.user.userEmail;
+    this.street = this.$store.state.user.userAddress.userStreet;
+    this.city = this.$store.state.user.userAddress.userCity;
+    this.country = this.$store.state.user.userAddress.userCountry;
   },
   methods: {
     ...mapActions(["UpdateUserProfile"]),
@@ -109,8 +109,12 @@ export default {
         street: this.street,
         city: this.city,
         country: this.country,
+        id: this.$store.state.user.userID,
+
       });
-      this.$emit("close");
+      this.$router.push("/");
+
+      // this.$emit("close");
     },
     close() {
       this.$emit("close");
@@ -130,11 +134,13 @@ export default {
   transition: opacity 0.3s ease;
 }
 .modal-container {
-  width: 60%;
+  width: 40%;
   height: 60%;
   top: 20%;
-  margin: auto;
-  padding: 20px 30px;
+  /* left:5%; */
+  /* right:5%; */
+  margin: 0 auto;
+  /* padding: 20px 30px; */
   background-color: rgba(0, 0, 0, 0.5);
 
   border-radius: 2px;

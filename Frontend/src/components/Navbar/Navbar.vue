@@ -14,7 +14,11 @@
 
         <li><router-link to="/UserProfile">USER PROFILE</router-link></li>
         <li><router-link to="/Blogs">BLOGS</router-link></li>
-        <li><router-link to="/EventAttendance">ATTENDANCE</router-link></li>
+        <li v-if="isAuth">
+          <router-link :to="{ name: 'EventAttendance', params: { id: UserID } }"
+            >ATTENDANCE</router-link
+          >
+        </li>
       </ul>
     </nav>
     <router-link to="/Login" class="signoutbtn">SIGN OUT</router-link>
@@ -22,15 +26,36 @@
 </template>
   
   <script>
+import user from "./../../user.json";
+import { mapGetters } from "vuex";
 export default {
   name: "Navbar",
+  data() {
+    return {
+      user: user,
+      isAuth: false,
+    };
+  },
+  computed: {
+    ...mapGetters(["UserID"]),
+  },
+  async created() {
+    if (
+      //if user is admin
+      user.role.id === "admin" &&
+      this.UserID === "admin"
+    ) {
+      this.isAuth = true;
+    }
+  },
 };
 </script>
   
 <style scoped >
 * {
-  font-family: "Poppins", sans-serif;
-  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+  font-weight:400;
+
 }
 
 header {

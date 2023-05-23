@@ -20,15 +20,24 @@ export default {
     userPhone: null,
     userEmail: "",
     userImage: null,
+    userEvents: [
+      {
+        eventId: null,
+        eventName: "",
+        regId: null,
+      },
+    ],
   },
   getters: {
     UserData: (state) => state,
+    UserID: (state) => state.userID,
   },
   actions: {
-    async UserProfile({ commit }) {
+    async UserProfile({ commit, state }) {
       const response = await axios.get(
         baseURL + "student/getProfile?id=" + state.userID
       );
+
       commit("USER_PROFILE", response.data);
     },
 
@@ -50,8 +59,20 @@ export default {
           });
       });
     },
-    UpdateUserProfile: ({ commit }, payload) => {
+    UpdateUserProfile: async ({ commit }, payload) => {
       console.log(payload);
+      const res = await axios.post(
+        baseURL + "student/editUserProfile",
+        payload
+      );
+
+    },
+    async getStudentRegistrations({ commit, state }) {
+      const response = await axios.get(
+        baseURL + "registration/getEventsByStudentId?id=" + state.userID
+      );
+
+      commit("STUDENT_EVENTS", response.data);
     },
   },
   mutations: {
@@ -70,6 +91,9 @@ export default {
     },
     LOGIN: function (state, { id }) {
       state.userID = id;
+    },
+    STUDENT_EVENTS: function (state, payload) {
+      state.userEvents = payload;
     },
   },
 };

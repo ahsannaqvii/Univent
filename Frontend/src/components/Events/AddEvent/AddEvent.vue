@@ -1,23 +1,7 @@
 <template>
   <div class="wrapper">
-    <div class="form-left">
-      <div class="form-left-container">
-        <h2>Event Information</h2>
-        <h5>Cabbages and Learning</h5>
-        <p class="text">
-          <span> Venue : Auditorium </span>
-        </p>
-        <p class="text">
-          <span>Date : 24-Apr-23 </span>
-        </p>
-
-        <div>
-          <input type="submit" class="account" value="Seminar" />
-        </div>
-      </div>
-    </div>
     <form class="form-right">
-      <h2>Registration form</h2>
+      <h2>Add New Event form</h2>
       <div class="row">
         <div class="col-sm-4 mb-3">
           <label>Event Name</label>

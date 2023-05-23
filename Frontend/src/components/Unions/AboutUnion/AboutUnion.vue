@@ -56,10 +56,8 @@ export default {
 };
 </script>
 <style scoped>
-body {
-  background-color: #ffffff;
-  font-family: "DM Sans", sans-serif;
-}
+
+
 
 h2,
 h3,

@@ -33,7 +33,7 @@
 
       <section class="work_skills card">
         <div class="work">
-          <h1 class="heading">work</h1>
+          <h1 class="heading">ADDRESS</h1>
           <div class="primary">
             <h1>
               {{ UserData.userAddress.userCity }} ,
@@ -50,12 +50,9 @@
 
         <!-- ===== ===== Skills Contaienr ===== ===== -->
         <div class="skills">
-          <h1 class="heading">Course</h1>
-          <ul>
-            <li style="--i: 0">Discrete Mathematics</li>
-            <li style="--i: 1">Web-Design</li>
-            <li style="--i: 2">UI/UX</li>
-            <li style="--i: 3">Algebra</li>
+          <h1 class="heading">Events Attended</h1>
+          <ul v-for="event in UserData.userEvents">
+            <li class="work__details">{{ event.eventName }}</li>
           </ul>
         </div>
       </section>
@@ -74,7 +71,7 @@
               {{ UserData.userAddress.userCountry }}</span
             >
           </div>
-          <p>Student</p>
+          <p>Student ({{ UserData.userID }}) </p>
         </div>
 
         <div class="btns">
@@ -185,7 +182,7 @@
 </template>
   
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import Modal from "../Modal/Modal.vue";
 export default {
   data() {
@@ -202,9 +199,11 @@ export default {
 
   mounted() {
     this.$store.dispatch("UserProfile");
+    this.getStudentRegistrations();
   },
 
   methods: {
+    ...mapActions(["getStudentRegistrations"]),
     showModal() {
       this.isModalVisible = true;
     },
@@ -224,7 +223,7 @@ export default {
   margin: 0;
   list-style: none;
   text-decoration: none;
-  font-family: "Poppins", sans-serif;
+  /* font-family: "Poppins", sans-serif; */
   font-size: 12px;
 }
 
@@ -352,10 +351,10 @@ header {
 .work_skills .work .heading,
 .work_skills .skills .heading {
   position: relative;
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: rgba(0, 0, 0, 0.6);
   text-transform: uppercase;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .work_skills .work .heading::before,
@@ -365,7 +364,7 @@ header {
   bottom: 0;
   right: 0;
   height: 0.1rem;
-  width: 88%;
+  width: 100%;
   background: rgba(0, 0, 0, 0.4);
 }
 
@@ -376,7 +375,7 @@ header {
 
 .work_skills .work .primary h1,
 .work_skills .work .secondary h1 {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   color: rgba(0, 0, 0, 0.8);
   margin-bottom: 0.6rem;
 }
@@ -387,7 +386,7 @@ header {
   top: 0;
   right: 3rem;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   color: #0099cc;
   background: #e6f2ff;
   padding: 0.4rem 1rem;
@@ -397,7 +396,7 @@ header {
 .work_skills .work .primary p,
 .work_skills .work .secondary p {
   margin-bottom: 1.8rem;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: rgba(0, 0, 0, 0.6);
   line-height: 1.6rem;
 }
@@ -405,41 +404,16 @@ header {
 /* =====>>  Skills Bars Css  <<===== */
 .work_skills .skills ul li {
   position: relative;
-  font-size: 1.2rem;
+  font-size: 1.0rem;
   line-height: 1.8rem;
   margin: 0.5rem;
   color: #000;
   font-weight: 500;
 }
 
-.work_skills .skills ul li::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  margin: auto;
-  height: 0.2rem;
-  background: #33ccff;
-  animation: skills 8s linear infinite;
-  animation-delay: calc(-2s * var(--i));
-}
 
-@keyframes skills {
-  0% {
-    width: 50%;
-    filter: hue-rotate(180deg);
-  }
 
-  50% {
-    width: 0;
-  }
 
-  100% {
-    width: 50%;
-    filter: hue-rotate(0);
-  }
-}
 
 /* ===== =====>>  User Details Css Start  <<===== ===== */
 .userDetails {
@@ -479,6 +453,7 @@ header {
   align-items: center;
 }
 
+
 .userDetails .btns ul li {
   margin-right: 2.5rem;
   border-radius: 0.5rem;
@@ -517,10 +492,6 @@ header {
   margin-bottom: 2.5rem;
 }
 
-/* .timeline_about .tabs ul li .edit_profile_btn  {
-  font-size: 20px;
-  color: ree; */
-/* } */
 .edit_profile_btn {
   background-color: #e6f2ff;
 

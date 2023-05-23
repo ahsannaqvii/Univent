@@ -276,7 +276,7 @@ img {
 }
 
 h6 {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 0.875rem;
   font-weight: 600;
   margin-top: 0;
@@ -285,7 +285,7 @@ h6 {
   text-transform: uppercase;
 }
 h2 {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 48px;
   line-height: normal;
   margin-bottom: 0.5rem;
@@ -310,20 +310,20 @@ input {
 }
 li,
 ul {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   line-height: 1.75;
   color: #141516;
 }
 h3,
 h4 {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   line-height: normal;
   text-align: left;
   color: #222930;
 }
 h3 {
-  font-size: 1.875rem;
+  font-size: 1.6rem;
   font-weight: bold;
 }
 a,
@@ -335,7 +335,7 @@ a {
   background-color: transparent;
 }
 p {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   line-height: 1.75;
   color: #141516;
@@ -543,7 +543,7 @@ span.tags {
 span.tags {
   display: inline-block;
   padding: 8px 8px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 13px;
   font-weight: 600;
   font-style: normal;

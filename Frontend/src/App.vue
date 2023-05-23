@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app">
     <Navbar v-if="!$route.meta.hideNavbar" />
     <router-view></router-view>
   </div>
@@ -17,7 +17,11 @@ export default {
 
 <style >
 * {
-  font-family: "DM sans", sans-serif;
+  font-family: "Montserrat", sans-serif;
   /* font-weight: 800; */
+}
+
+#app {
+  font-family: "Montserrat", sans-serif;
 }
 </style>

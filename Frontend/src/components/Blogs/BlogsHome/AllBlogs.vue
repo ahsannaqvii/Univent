@@ -83,6 +83,8 @@
           <!-- SIDEBAR  -->
           <div class="col-lg-4">
             <div class="sidebar">
+              <a href="/AddBlog"  class="sidebar__button">ADD BLOG</a>
+
               <div class="row">
                 <div class="col-lg-12">
                   <div class="sidebar-item search">
@@ -180,6 +182,15 @@ export default {
 };
 </script>
 <style scoped>
+.sidebar__button{
+  border-radius:10px;
+  border:1px solid #fff;
+  padding:10px;
+  color:#fff;
+  font-weight:500;
+  background-color: #20232e;
+  cursor:pointer;
+}
 .heading-page {
   padding-top: 110px;
 }

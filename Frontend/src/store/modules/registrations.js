@@ -32,6 +32,7 @@ export default {
       const response = await axios.post(baseURL + "addAttendance", payload);
       console.log(response);
     },
+   
   },
 
   mutations: {

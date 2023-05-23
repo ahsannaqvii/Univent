@@ -71,10 +71,10 @@
                 <div class="col-lg-12">
                   <div class="sidebar-item comments">
                     <div class="sidebar-heading">
-                      <h2>4 comments</h2>
+                      <h2>COMMENTS</h2>
                     </div>
                     <div class="content">
-                      <ul>
+                      <ul v-for="blogComment in this.displayBlog.blogComments">
                         <li>
                           <div class="author-thumb">
                             <img
@@ -83,61 +83,11 @@
                             />
                           </div>
                           <div class="right-content">
-                            <h4>ABCD<span>May 16, 2020</span></h4>
+                            <h4>
+                              {{ blogComment.sname }}<span>May 16, 2020</span>
+                            </h4>
                             <p>
-                              Fusce ornare mollis eros. Duis et diam vitae justo
-                              fringilla condimentum eu quis leo. Vestibulum id
-                              turpis porttitor sapien facilisis scelerisque.
-                              Curabitur a nisl eu lacus convallis eleifend
-                              posuere id tellus.
-                            </p>
-                          </div>
-                        </li>
-                        <li class="replied">
-                          <div class="author-thumb">
-                            <img
-                              src="https://i.ibb.co/SdPPMnP/comment-author-01.jpg"
-                              alt=""
-                            />
-                          </div>
-                          <div class="right-content">
-                            <h4>Thirteen Man<span>May 20, 2020</span></h4>
-                            <p>
-                              In porta urna sed venenatis sollicitudin. Praesent
-                              urna sem, pulvinar vel mattis eget.
-                            </p>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="author-thumb">
-                            <img
-                              src="https://i.ibb.co/SdPPMnP/comment-author-01.jpg"
-                              alt=""
-                            />
-                          </div>
-                          <div class="right-content">
-                            <h4>Belisimo Mama<span>May 16, 2020</span></h4>
-                            <p>
-                              Nullam nec pharetra nibh. Cras tortor nulla,
-                              faucibus id tincidunt in, ultrices eget ligula.
-                              Sed vitae suscipit ligula. Vestibulum id turpis
-                              volutpat, lobortis turpis ac, molestie nibh.
-                            </p>
-                          </div>
-                        </li>
-                        <li class="replied">
-                          <div class="author-thumb">
-                            <img
-                              src="https://i.ibb.co/SdPPMnP/comment-author-01.jpg"
-                              alt=""
-                            />
-                          </div>
-                          <div class="right-content">
-                            <h4>Thirteen Man<span>May 22, 2020</span></h4>
-                            <p>
-                              Mauris sit amet justo vulputate, cursus massa
-                              congue, vestibulum odio. Aenean elit nunc, gravida
-                              in erat sit amet, feugiat viverra leo.
+                              {{ blogComment.comment }}
                             </p>
                           </div>
                         </li>
@@ -146,7 +96,7 @@
                   </div>
                 </div>
                 <!-- COMMENT INPUT SEC -->
-
+                <!-- <Comments :blogId="this.$route.params.blogId" /> -->
                 <div class="col-lg-12">
                   <div class="sidebar-item submit-comment">
                     <div class="sidebar-heading">
@@ -163,6 +113,7 @@
                                 id="name"
                                 placeholder="Your name"
                                 required=""
+                                v-model="name"
                                 style="
                                   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==');
                                   background-repeat: no-repeat;
@@ -202,15 +153,16 @@
                                 id="message"
                                 placeholder="Type your comment"
                                 required=""
+                                v-model="comment"
                               ></textarea>
                             </fieldset>
                           </div>
                           <div class="col-lg-12">
                             <fieldset>
                               <button
-                                type="submit"
                                 id="form-submit"
                                 class="main-button"
+                                @click.prevent="submitComment"
                               >
                                 Submit
                               </button>
@@ -265,6 +217,7 @@
                     </div>
                   </div>
                 </div>
+
                 <!-- SIDEBAR CATEGORIS  -->
                 <div class="col-lg-12">
                   <div class="sidebar-item categories">
@@ -314,18 +267,35 @@
 
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Blog",
+  data: () => ({
+    blogId: "",
+    name: "",
+    comment: "",
+  }),
+
   mounted() {
     // this.$store.dispatch("Blogs");
   },
   computed: {
-    ...mapGetters(["GetBlogs", "GetBlog"]),
+    ...mapGetters(["GetBlog"]),
 
     displayBlog() {
       return this.GetBlog(this.$route.params.blogId);
+    },
+  },
+  methods: {
+    ...mapActions(["AddComment"]),
+    submitComment() {
+      this.$store.dispatch("AddComment", {
+        blogId: this.$route.params.blogId,
+        name: this.name,
+        comment: this.comment,
+      });
+      this.$router.push("/Blogs");
     },
   },
 };

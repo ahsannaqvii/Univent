@@ -11,6 +11,7 @@ import Blogs from "@/components/Blogs/BlogsHome/AllBlogs.vue";
 import Blog from "@/components/Blogs/Blog/Blog.vue";
 
 import Unauthorized from "@/views/Unauthorized/Unauthorized.vue";
+import AddBlog from "./../components/Blogs/AddBlog/AddBlog.vue";
 export default [
   {
     name: "Home",
@@ -77,5 +78,10 @@ export default [
     name: "AddEvent",
     path: "/AddEvent",
     component: AddEvent,
+  },
+  {
+    name: "AddBlog",
+    path: "/AddBlog",
+    component: AddBlog,
   },
 ];

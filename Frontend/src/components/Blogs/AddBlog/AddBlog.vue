@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <div class="form-left">
+    <!-- <div class="form-left">
       <div class="form-left-container">
         <h2>Event Information</h2>
         <h5>Cabbages and Learning</h5>
@@ -15,114 +15,119 @@
           <input type="submit" class="account" value="Seminar" />
         </div>
       </div>
-    </div>
+    </div> -->
     <form class="form-right">
-      <h2>Registration form</h2>
+      <h2>Add Blog form</h2>
       <div class="row">
-        <div class="col-sm-6 mb-3">
-          <label>First Name</label>
+        <div class="col-sm-4 mb-3">
+          <label>Blog Title</label>
 
           <v-text-field
             class="text-field"
             type="text"
-            name="first_name"
-            placeholder="Enter your first name"
+            name="name"
+            placeholder="Enter your blog title"
             outlined
+            v-model="title"
           />
         </div>
-        <div class="col-sm-6 mb-3">
-          <label>Last Name</label>
+        <div class="col-sm-4 mb-3">
+          <label>Blog Category</label>
 
           <v-text-field
             class="text-field"
             type="text"
-            name="last_name"
-            placeholder="Enter your last name"
+            name="eventType"
+            placeholder="Enter your blog category "
             outlined
+            v-model="category"
           />
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-6 mb-3">
-          <label>Event ID</label>
+        <div class="col-sm-4 mb-3">
+          <label>Author Name</label>
+
           <v-text-field
             class="text-field"
             type="text"
-            name="email"
-            placeholder="Enter the event ID"
-            v-model.trim="id"
-            readonly
+            name="authorName"
+            placeholder="Enter the author name"
             outlined
+            v-model="name"
           />
         </div>
-        <div class="col-sm-6 mb-3">
-          <label>Student ID</label>
+        <div class="col-sm-4 mb-3">
+          <label>Blog Date</label>
           <v-text-field
             class="text-field"
-            type="text"
-            v-model="studentID"
-            name="studentID"
-            placeholder="Enter your student ID"
+            type="date"
+            v-model="date"
+            name="date"
+            placeholder="Enter the blog date"
             outlined
           />
         </div>
       </div>
-      <div class="mb-3">
-        <label class="option">
-          I agree to the <a href="#">Terms and Conditions</a>
-          <input type="checkbox" checked />
-          <span class="checkmark"></span>
-        </label>
+
+      <div class="row text__area">
+        <label style="margin-left:-25px;">Blog Content </label>
+
+        <textarea
+          name=""
+          id=""
+          cols="16"
+          rows="5"
+          class="text-area"
+          v-model="content"
+        ></textarea>
       </div>
+
       <div class="form-field">
-        <button class="register" @click.prevent="RegisterEvent">
-          Register
-        </button>
+        <button class="register" @click.prevent="AddBlog">Add Blog</button>
       </div>
     </form>
   </div>
 </template>
-
-
-<script>
+  
+  <script>
 export default {
-  name: "event-registration",
-  props: {
-    eventName: String,
-    venue: String,
-    guestName: String,
-    date: String,
-  },
+  name: "AddBlog",
   data: () => ({
-    id: null,
-    studentID: null,
+    category: "",
+    title: "",
+    date: "",
+    content: "",
+    author: "",
   }),
-  created() {
-    this.id = this.$route.params.eventId;
-    console.log(this.id);
-  },
   methods: {
-    RegisterEvent() {
-      this.$store
-        .dispatch("EventRegistration", {
-          eventId: this.id,
-          studentId: this.studentID,
-        })
-        .then(() => {
-          this.$router.push("/");
-        })
-        .catch((err) => {
-          console.log(err);
-          alert("Registration failed");
-        });
+    AddBlog() {
+      this.$store.dispatch("AddBlog", {
+        author: this.author,
+        title: this.title,
+        category: this.category,
+        date: this.date,
+        content: this.content,
+      });
     },
   },
 };
 </script>
-
-<style scoped>
+  
+  
+  <style scoped>
+.text__area {
+  margin-left: 9%;
+}
+.text-area {
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+.row {
+  justify-content: space-around;
+}
 .wrapper {
-  max-width: 1200px;
+  max-width: 800px;
   background-color: #fff;
   border-radius: 10px;
   position: relative;
@@ -138,7 +143,7 @@ export default {
   border-bottom-left-radius: 10px;
   padding: 20px 40px;
   position: relative;
-  height: 40rem;
+  height: 55rem;
   width: 100%;
   color: #fff;
 }
@@ -199,7 +204,7 @@ export default {
 }
 
 .wrapper .form-right {
-  padding: 20px 60px;
+  padding: 20px 40px;
   position: relative;
   width: 100%;
 }
@@ -321,5 +326,3 @@ export default {
   color: #001233;
 }
 </style>
-
-

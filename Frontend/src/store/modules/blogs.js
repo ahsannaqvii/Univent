@@ -19,6 +19,13 @@ export default {
         blogYear: "",
         id: null,
         date: null,
+        blogComments: [
+          {
+            comment: "",
+            sname: "",
+            id: null,
+          },
+        ],
       },
     ],
   },
@@ -36,12 +43,21 @@ export default {
   actions: {
     async Blogs({ commit }) {
       const response = await axios.get(baseURL + "getAllBlogs");
+
       //Extract date into day month year format.
       response.data.forEach((element) => {
         element.date = extractDate(element.date);
       });
 
       commit("BLOGS", response.data);
+    },
+    async AddBlog({ commit }, payload) {
+      const response = await axios.post(baseURL + "addBlog", payload);
+    },
+    async AddComment({ commit }, payload) {
+      console.log(payload);
+      const response = await axios.post(baseURL + "postComment", payload);
+      console.log(response.data);
     },
   },
 

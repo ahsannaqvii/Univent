@@ -1,48 +1,65 @@
-import Vue from 'vue'
-import App from './App.vue'
-import Routes from './router/routes.js'
+import Vue from "vue";
+import App from "./App.vue";
+import Routes from "./router/routes.js";
 import VueRouter from "vue-router";
-import store from './store/store.js';
+import store from "./store/store.js";
 
-
-
-// Catering Font Awesome Icons 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { fab } from '@fortawesome/free-brands-svg-icons'
+// Catering Font Awesome Icons
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { fab } from "@fortawesome/free-brands-svg-icons";
 
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 
-import vuetify from './plugins/vuetify'
-import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
-import 'bootstrap/dist/css/bootstrap.css';
+import user from "./user.json";
+import vuetify from "./plugins/vuetify";
+import BootstrapVue from "bootstrap-vue/dist/bootstrap-vue.esm";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+import "bootstrap/dist/css/bootstrap.css";
 
-Vue.config.productionTip = false
-Vue.use(VueRouter)
-
+Vue.config.productionTip = false;
+Vue.use(VueRouter);
 
 Vue.use(BootstrapVue);
 /* add icons to the library */
-library.add(fas,fab,far)
+library.add(fas, fab, far);
 
 /* add font awesome icon component */
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-
+Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes:Routes,
-})
+  routes: Routes,
+});
 
-// router.beforeEach((to, from, next) => {
-// }   )
+router.beforeEach((to, from, next) => {
+  //check page is protected or not
+  console.log("to.meta.authRequired", to.meta.authRequired);
+  if (to.meta.authRequired === "true") {
+    //get contact's id
+    const contactId = to.params.id;
+    console.log(contactId);
+    //access check
+    if (
+      user.role === "admin" ||
+      //if user is the contact itself
+      user.id === contactId
+    ) {
+      return next();
+    } else {
+      router.push({
+        name: "Unauthorized",
+      });
+    }
+  } else {
+    return next();
+  }
+});
 new Vue({
   vuetify,
-  router : router,
+  router: router,
   store,
-  render: h => h(App),
-
-}).$mount('#app')
+  render: (h) => h(App),
+}).$mount("#app");
