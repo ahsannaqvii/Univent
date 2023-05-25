@@ -32,6 +32,7 @@
                   <div class="price"></div>
                   <a
                     ><img
+                      crossorigin="anonymous"
                       :src="eventInfo[i].eventImage"
                       alt="New Lecturer Events"
                   /></a>
@@ -74,14 +75,12 @@
 
 
 <script>
-
 export default {
   name: "EventInfo",
   props: {
     eventInfo: Array,
     GetUniqueEventTypes: Array,
   },
-
 };
 </script>
 
