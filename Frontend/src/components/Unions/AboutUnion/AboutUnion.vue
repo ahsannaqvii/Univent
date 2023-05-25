@@ -6,15 +6,11 @@
           <h2 class="mb-lg-5 mb-4">ANNOUCEMENT</h2>
         </div>
 
+        
         <div class="col-lg-5 col-12 me-auto mb-4 mb-lg-0">
           <h3 class="mb-3">International Student Union</h3>
 
-          <p>
-            <strong>Since 1984</strong>, Tiya is ranked #8 in the top 10 golf
-            courses in the world. Tiya is Bootstrap 5 HTML CSS template for golf
-            clubs. Anyone can modify and use this layout for commercial
-            purposes.
-          </p>
+          <p><strong>Since 1984</strong>, {{ this.GetUnionAnnoucement }}</p>
 
           <p>
             Tiya Golf Club is 100% free CSS template provided by TemplateMo
@@ -22,25 +18,14 @@
             visiting.
           </p>
         </div>
-
         <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0 mb-md-0">
           <div class="member-block">
             <div class="member-block-image-wrap">
               <img
-                src="https://i.ibb.co/QYDvjcs/2672335.jpg"
+                :src="this.GetUnionImage"
                 class="member-block-image img-fluid"
                 alt=""
               />
-
-              <ul class="social-icon">
-                <li class="social-icon-item">
-                  <a href="#" class="social-icon-link bi-twitter"></a>
-                </li>
-
-                <li class="social-icon-item">
-                  <a href="#" class="social-icon-link bi-whatsapp"></a>
-                </li>
-              </ul>
             </div>
           </div>
         </div>
@@ -51,14 +36,15 @@
 
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "AboutUnion",
+  computed: {
+    ...mapGetters(["GetUnionAnnoucement", "GetUnionImage"]),
+  },
 };
 </script>
 <style scoped>
-
-
-
 h2,
 h3,
 h4,

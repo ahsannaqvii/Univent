@@ -7,12 +7,12 @@
             <h2>Upcoming Events</h2>
 
             <div class="text-center">
-              <!-- <router-link style="margin-right: 20px; background-color:black;">Add Event </router-link> -->
               <v-btn
                 dark
                 v-bind="attrs"
                 v-on="on"
                 style="margin-right: 20px; padding-top: 10px"
+                v-if="isAuth"
                 href="/AddEvent"
               >
                 Add Event
@@ -126,6 +126,8 @@
 <script>
 import { mapGetters } from "vuex";
 
+import user from "./../../../user.json";
+
 export default {
   name: "CurrentEvent",
   props: {
@@ -135,7 +137,10 @@ export default {
     isActive: true,
     eventCategory: ["All Events"],
     selectedEvent: null,
+    user: user,
+    isAuth: false,
   }),
+
   methods: {
     SelectEventCategory(item) {
       this.selectedEvent = item;
@@ -163,10 +168,20 @@ export default {
         "custom-block-bg": !this.isActive,
       };
     },
-    ...mapGetters(["GetUniqueEventTypes"]),
+    ...mapGetters(["GetUniqueEventTypes", "UserID"]),
   },
+
   mounted() {
     this.eventCategory.push(...this.GetUniqueEventTypes);
+  },
+  created() {
+    if (
+      //if user is admin
+      user.role.id === "admin" &&
+      this.UserID === "admin"
+    ) {
+      this.isAuth = true;
+    }
   },
 };
 </script>

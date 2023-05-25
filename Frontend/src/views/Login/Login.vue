@@ -9,9 +9,7 @@
             <a href="#" class="social"
               ><font-awesome-icon :icon="['fab', 'facebook']"
             /></a>
-            <a href="#" class="social"
-              ><font-awesome-icon :icon="['fab', 'google']"
-            /></a>
+           
             <a href="#" class="social"
               ><font-awesome-icon :icon="['fab', 'linkedin']"
             /></a>

@@ -21,8 +21,8 @@
               />
             </div>
             <div class="team-info">
-              <h3>Mark Wilson</h3>
-              <span>I love Teaching</span>
+              <h3>{{ this.GetUnionData.president }}</h3>
+              <span>President</span>
             </div>
             <ul class="social-icon">
               <li>
@@ -44,8 +44,8 @@
               />
             </div>
             <div class="team-info">
-              <h3>Catherine</h3>
-              <span>Education is the key!</span>
+              <h3>{{ this.GetUnionData.vicePresident }}</h3>
+              <span>Vice President</span>
             </div>
             <ul class="social-icon">
               <li>
@@ -67,8 +67,8 @@
               />
             </div>
             <div class="team-info">
-              <h3>Jessie Ca</h3>
-              <span>I like Online Courses</span>
+              <h3>{{ this.GetUnionData.secretary }}</h3>
+              <span>Secretary</span>
             </div>
             <ul class="social-icon">
               <!-- <li><a href="#" class="fa fa-twitter"></a></li> -->
@@ -91,8 +91,8 @@
               />
             </div>
             <div class="team-info">
-              <h3>Andrew Berti</h3>
-              <span>Learning is fun</span>
+              <h3>{{ this.GetUnionData.headITDept }}</h3>
+              <span>Head IT Department</span>
             </div>
             <ul class="social-icon">
               <li>
@@ -109,8 +109,12 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "union-team",
+  computed: {
+    ...mapGetters(["GetUnionData"]),
+  },
 };
 </script>
 
@@ -174,12 +178,10 @@ h2 small {
 #team {
   background: #f9f9f9;
   text-align: center;
-
 }
 
-
 .row {
-  margin-bottom:80px;
+  margin-bottom: 80px;
 }
 .team-thumb {
   background: #ffffff;

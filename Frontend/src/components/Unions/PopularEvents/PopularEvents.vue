@@ -4,155 +4,39 @@
       <h2>POPULAR EVENTS <small>from Student Union</small></h2>
     </div>
     <div class="container">
-      <div class="item-container">
+      <div class="item-container" v-for="event in this.GetUnionEvents">
         <div class="img-container">
-          <img
-            src="./../../../assets/popular-events-union/courses-image1.jpg"
-            alt="Event image"
-          />
+          <img :src="event.eventImage" alt="Event image" />
         </div>
 
         <div class="body-container">
           <div class="overlay"></div>
 
           <div class="event-info">
-            <p class="title">Bubbe's Book Club</p>
+            <p class="title">{{ event.name }}</p>
             <div class="separator"></div>
-            <p class="info">Bellmore, NY</p>
+            <p class="info">{{ event.eventType }}</p>
             <p class="price">Free</p>
 
             <div class="additional-info">
               <p class="info">
                 <i class="fas fa-map-marker-alt"></i>
-                Grand Central Terminal
+                {{ event.venue }}
               </p>
               <p class="info">
                 <i class="far fa-calendar-alt"></i>
-                Sat, Sep 19, 10:00 AM EDT
+                {{ event.eventDate }}, {{ event.eventTime }}
               </p>
 
               <p class="info description">
-                Welcome! Everyone has a unique perspective after reading a book,
-                and we would love you to share yours with us! We meet one Sunday
-                evening <span>more...</span>
+                {{ event.description }} <span>more...</span>
               </p>
             </div>
           </div>
-          <button class="action">Register</button>
-        </div>
-      </div>
 
-      <div class="item-container">
-        <div class="img-container">
-          <img
-            src="./../../../assets/popular-events-union/courses-image2.jpg"
-            alt="Event image"
-          />
-        </div>
-
-        <div class="body-container">
-          <div class="overlay"></div>
-
-          <div class="event-info">
-            <p class="title">The Overstory</p>
-            <div class="separator"></div>
-            <p class="info">New York, NY</p>
-            <p class="price">29$</p>
-
-            <div class="additional-info">
-              <p class="info">
-                <i class="fas fa-map-marker-alt"></i>
-                245 W 52nd St, New York
-              </p>
-              <p class="info">
-                <i class="far fa-calendar-alt"></i>
-                Sat, Sep 19, 10:00 AM EDT
-              </p>
-
-              <p class="info description">
-                Welcome! Everyone has a unique perspective after reading a book,
-                and we would love you to share yours with us! We meet one Sunday
-                evening <span>more...</span>
-              </p>
-            </div>
-          </div>
-          <button class="action">Book it</button>
-        </div>
-      </div>
-
-      <div class="item-container">
-        <div class="img-container">
-          <img
-            src="./../../../assets/popular-events-union/courses-image3.jpg"
-            alt="Event image"
-          />
-        </div>
-
-        <div class="body-container">
-          <div class="overlay"></div>
-
-          <div class="event-info">
-            <p class="title">The NY Festival</p>
-            <div class="separator"></div>
-            <p class="info">New York, NY</p>
-            <p class="price">70$</p>
-
-            <div class="additional-info">
-              <p class="info">
-                <i class="fas fa-map-marker-alt"></i>
-                245 W 52nd St, New York
-              </p>
-              <p class="info">
-                <i class="far fa-calendar-alt"></i>
-                Sat, Sep 19, 10:00 AM EDT
-              </p>
-
-              <p class="info description">
-                Welcome! Everyone has a unique perspective after reading a book,
-                and we would love you to share yours with us! We meet one Sunday
-                evening <span>more...</span>
-              </p>
-            </div>
-          </div>
-          <button class="action">Book it</button>
-        </div>
-      </div>
-
-      <div class="item-container">
-        <div class="img-container">
-          <img
-            src="./../../../assets/popular-events-union/courses-image4.jpg"
-            alt="Event image"
-          />
-        </div>
-
-        <div class="body-container">
-          <div class="overlay"></div>
-
-          <div class="event-info">
-            <p class="title">Tech Bubble Conf</p>
-            <div class="separator"></div>
-            <p class="info">New York, NY</p>
-            <p class="price">35$</p>
-
-            <div class="additional-info">
-              <p class="info">
-                <i class="fas fa-map-marker-alt"></i>
-                245 W 52nd St, New York
-              </p>
-              <p class="info">
-                <i class="far fa-calendar-alt"></i>
-                Sat, Sep 19, 10:00 AM EDT
-              </p>
-
-              <p class="info description">
-                Welcome! Everyone has a unique perspective after reading a book,
-                and we would love you to share yours with us! We meet one Sunday
-                evening <span>more...</span>
-              </p>
-            </div>
-          </div>
-          <button class="action">Register</button>
+          <a class="action" :href="'/event-registration/' + event.id"
+            >Register</a
+          >
         </div>
       </div>
     </div>
@@ -160,8 +44,13 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "union-event",
+  computed: {
+    ...mapGetters(["GetUnionEvents"]),
+  },
 };
 </script>
 
@@ -203,13 +92,12 @@ h2 small {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .item-container {
   position: relative;
   margin: 24px;
-  width: 320px;
+  width: 500px;
   height: 570px;
   overflow: hidden;
   background-color: #fff;
@@ -228,6 +116,7 @@ h2 small {
 
 .img-container img {
   width: 100%;
+  height: 100%;
 }
 
 .body-container {
@@ -264,6 +153,7 @@ h2 small {
   font-weight: bold;
   letter-spacing: 1px;
   margin: 12px;
+  text-align: center;
 }
 
 .info {

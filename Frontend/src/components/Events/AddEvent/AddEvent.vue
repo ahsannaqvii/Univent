@@ -167,6 +167,7 @@ export default {
         eventImage: this.eventImage,
         unionName: this.unionName,
       });
+      this.$router.push("/Event");
     },
   },
 };

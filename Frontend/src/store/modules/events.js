@@ -55,7 +55,7 @@ export default {
   },
   actions: {
     async EventData({ commit }) {
-      const response = await axios.get(baseURL + "event/getAllEvents");
+      const response = await axios.get(baseURL + "event/getAllEvents" );
       let updatedData = clearData(response.data);
 
       updatedData.forEach((element) => {
@@ -95,25 +95,4 @@ export default {
     },
   },
 };
-// const res = axios.get(
-//   "http://localhost:8080/api/student/getImage?id=1120",
-//   {
-//     responseType: "blob",
-//     headers: {
-//       "content-type": "image/jpeg",
-//       accept: "image/jpeg",
-//     },
-//   }
-// ).then((res) => {
-//   const urlCreator = window.URL || window.webkitURL
-//   let tempData = urlCreator.createObjectURL(res.data)
-//   commit("EVENT_IMG", tempData)
-// }).catch((err) => {
-//   console.log(err);
-// });
 
-//mutation
-// EVENT_IMG: function (state, payload) {
-//   console.log(payload);
-//   state.eventImg = payload;
-// },

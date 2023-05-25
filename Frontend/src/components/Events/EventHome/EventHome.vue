@@ -17,7 +17,7 @@
                   target="_blank"
                   >Java</a
                 >,
-                <a href="/training_tracks/spring-developer/" target="_blank"
+                <a href="/Event" target="_blank"
                   >Spring</a
                 >,
                 <a href="/java-framework/jpa-hibernate/" target="-blank"

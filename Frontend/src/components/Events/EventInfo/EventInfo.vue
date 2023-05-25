@@ -24,16 +24,16 @@
         </div>
         <div class="col-lg-8">
           <div class="row">
-            <!-- <div v-for="(eventInfo, index) in eventInfo" class="col-lg-6"> -->
 
+            
             <div v-for="i in 4" class="col-lg-6">
               <div class="event-item">
                 <div class="thumb">
                   <div class="price"></div>
                   <a
                     ><img
-                      crossorigin="anonymous"
-                      :src="eventInfo[i].eventImage"
+
+                    :src="eventInfo[i].eventImage"
                       alt="New Lecturer Events"
                   /></a>
                 </div>

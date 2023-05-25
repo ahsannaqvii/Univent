@@ -102,7 +102,7 @@
                         </p>
                       </div>
                       <a
-                        href="/works/mobile-fintech/"
+                        href="/"
                         class="btn -secondary"
                         tabindex="0"
                       >
@@ -155,7 +155,7 @@
                         </p>
                       </div>
                       <a
-                        href="/works/mobile-payment-gateway/"
+                        href=""
                         class="btn -secondary"
                         tabindex="-1"
                       >

@@ -3,7 +3,7 @@ import Vuex from "vuex";
 import axios from "axios";
 
 Vue.use(Vuex);
-const baseURL = "https://univent-rest-api.herokuapp.com/blog/";
+const baseURL = "https://univent-rest-api.herokuapp.com/api/blog/";
 
 import { extractDate, getMonthName } from "./../../utils/eventsUtil";
 export default {

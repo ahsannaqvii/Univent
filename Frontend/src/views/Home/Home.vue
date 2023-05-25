@@ -19,7 +19,7 @@
                 </p>
                 <div class="main-button-red">
                   <div class="scroll-to-section">
-                    <a href="#contact">REGISTER Now</a>
+                    <a href="/Event">REGISTER Now</a>
                   </div>
                 </div>
               </div>
@@ -101,12 +101,7 @@ export default {
   mounted() {
     this.EventData();
   },
-  computed: mapGetters([
-    "GetEventData",
-    "GetUniqueEventTypes",
-    "SplitDate",
-    "GetEventImage",
-  ]),
+  computed: mapGetters(["GetEventData", "GetUniqueEventTypes"]),
 };
 </script>
 <style>
@@ -235,7 +230,6 @@ banner
   object-fit: cover;
   z-index: -1;
 }
-
 
 .video-overlay {
   position: absolute;

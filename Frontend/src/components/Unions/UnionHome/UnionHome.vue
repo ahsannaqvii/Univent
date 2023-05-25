@@ -9,7 +9,6 @@
         transition="fade-transition"
       ></v-carousel-item>
     </v-carousel>
-
     <AboutUnion />
     <UnionTeam />
     <PopularEvents />
@@ -23,6 +22,7 @@ import AboutUnion from "../AboutUnion/AboutUnion.vue";
 import PopularEvents from "../PopularEvents/PopularEvents.vue";
 import UnionTeam from "../UnionTeam/UnionTeam.vue";
 import Reviews from "../StudentReviews/Reviews.vue";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "Union",
   components: {
@@ -46,6 +46,13 @@ export default {
         },
       ],
     };
+  },
+
+  methods: {
+    ...mapActions(["Unions"]),
+  },
+  mounted() {
+    this.Unions();
   },
 };
 </script>
