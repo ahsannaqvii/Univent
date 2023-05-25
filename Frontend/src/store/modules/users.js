@@ -3,7 +3,7 @@ import Vuex from "vuex";
 import axios from "axios";
 
 Vue.use(Vuex);
-const baseURL = "http://localhost:8080/api/";
+const baseURL = "https://univent-rest-api.herokuapp.com/api/";
 
 export default {
   state: {
@@ -27,10 +27,12 @@ export default {
         regId: null,
       },
     ],
+    isLoggedIn: false,
   },
   getters: {
     UserData: (state) => state,
     UserID: (state) => state.userID,
+    IsAuthenticated: (state) => state.isLoggedIn,
   },
   actions: {
     async UserProfile({ commit, state }) {
@@ -91,6 +93,7 @@ export default {
     },
     LOGIN: function (state, { id }) {
       state.userID = id;
+      state.isLoggedIn = true;
     },
     STUDENT_EVENTS: function (state, payload) {
       state.userEvents = payload;

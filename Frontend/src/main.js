@@ -35,26 +35,14 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  //check page is protected or not
-  console.log("to.meta.authRequired", to.meta.authRequired);
-  if (to.meta.authRequired === "true") {
-    //get contact's id
-    const contactId = to.params.id;
-    console.log(contactId);
-    //access check
-    if (
-      user.role === "admin" ||
-      //if user is the contact itself
-      user.id === contactId
-    ) {
-      return next();
+  if (to.matched.some((record) => record.meta.authRequired)) {
+    if (!store.getters.IsAuthenticated) {
+      next({ name: "Login" });
     } else {
-      router.push({
-        name: "Unauthorized",
-      });
+      next();
     }
   } else {
-    return next();
+    next();
   }
 });
 new Vue({

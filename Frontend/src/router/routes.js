@@ -17,6 +17,9 @@ export default [
     name: "Home",
     path: "/",
     component: Home,
+    meta: {
+      authRequired: "true",
+    },
   },
   {
     //This is our protected page.
