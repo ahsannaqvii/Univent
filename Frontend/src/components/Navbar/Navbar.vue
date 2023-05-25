@@ -12,13 +12,14 @@
         <li><router-link to="/Union">UNION</router-link></li>
         <li><router-link to="/Event">EVENTS</router-link></li>
 
-        <li><router-link to="/UserProfile">USER PROFILE</router-link></li>
         <li><router-link to="/Blogs">BLOGS</router-link></li>
         <li v-if="isAuth">
           <router-link :to="{ name: 'EventAttendance', params: { id: UserID } }"
             >ATTENDANCE</router-link
           >
         </li>
+        <li><router-link to="/UserProfile"  v-if="!isAuth">USER PROFILE</router-link></li>
+
       </ul>
     </nav>
     <router-link to="/Login" class="signoutbtn">SIGN OUT</router-link>

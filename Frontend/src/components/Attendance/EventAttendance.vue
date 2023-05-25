@@ -119,6 +119,8 @@ export default {
     },
     SubmitAttendance: function () {
       this.$store.dispatch("MarkAttendance", this.attendanceData);
+      alert("ATTENDANCE MARKED!")
+      this.$router.push("/");
     },
   },
   mounted() {
